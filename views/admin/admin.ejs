@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../../assets/myStyle.css">
+  <script src="../assets/modjQuery.js"></script>
+  <title>Administrator</title>
+</head>
+<body class="removeElement">
+  <div class="col-sm-12 modHeaderParent sticky">
+    <p class="h2 hidden-xs">DSASHS Online Enrollment System</p>
+    <p class="h3 visible-xs">DSASHS Online Enrollment System</p>
+  </div>
+  <div class="col-sm-12 modBodyContainer">
+    <div class="col-sm-3 col-xs-1 modChildBody modNav">
+      <ul class="modParentNav">
+        <li id="entriesNav" title="Entries" class="<%if(hold==='admin'){%>liActive<%}else{%><%}%>"><a class="modSideNav" href="/administrator/admin"><i class="fa fa-sign-in">&nbsp <span class="modFonts hidden-xs">Entries</span></i></a></li>
+        <li id="studentsNav" title="Students" class="<%if(hold==='students'){%>liActive<%}else{%><%}%>"><a class="modSideNav" href="/administrator/students"><i class="fa fa-id-card">&nbsp <span class="modFonts hidden-xs">Student</span></i></a></li>
+        <li id="teachersNav" title="Teacher" class="<%if(hold==='teachers' || hold==='add-teacher'){%>liActive<%}else{%><%}%>"><a class="modSideNav" href="/administrator/teachers"><i class="fa fa-user-circle">&nbsp <span class="modFonts hidden-xs">Teacher</span></i></a></li>
+        <li id="enrolmentNav" title="Strands" class="<%if(hold==='enrolment' || hold==='add-strands'){%>liActive<%}else{%><%}%>"><a class="modSideNav" href="/administrator/enrolment"><i class="fa fa-file">&nbsp <span class="modFonts hidden-xs">Enrollment</span></i></a></li>
+        <li id="subjectsNav" title="Subjects" class="<%if(hold==='subjects' || hold==='user-add-subject' || hold==='user-edit-subject'){%>liActive<%}else{%><%}%>"><a class="modSideNav" href="/administrator/subjects"><i class="fa fa-table">&nbsp <span class="modFonts hidden-xs">Subjects</span></i></a></li>
+        <li id="schedulesNav" title="Schedules"class="<%if(hold==='schedules' || hold==='admin-schedules'){%>liActive<%}else{%><%}%>"><a class="modSideNav" href="/administrator/schedules"><i class="fa fa-hourglass">&nbsp <span class="modFonts hidden-xs">Schedules</span></i></a></li>
+        <li id="usersNav" title="Users" class="<%if(hold==='users' || hold==='user-add-new-user'){%>liActive<%}else{%><%}%>"><a class="modSideNav" href="/administrator/users"><i class="fa fa-users">&nbsp <span class="modFonts hidden-xs">Users</span></i></a></li>
+        <li id="settingsNav" title="Settings"class="<%if(hold==='settings' || hold==='settings-security' || hold==='settings-enrollment'){%>liActive<%}else{%><%}%>"><a class="modSideNav" href="/administrator/settings"><i class="fa fa-cog">&nbsp <span class="modFonts hidden-xs">Settings</span></i></a></li>
+        <li id="reportsNav" title="Reports" class="<%if(hold==='reports'){%>liActive<%}else{%><%}%>"><a class="modSideNav" href="/administrator/reports"><i class="fa fa-print">&nbsp <span class="modFonts hidden-xs">Reports</span></i></a></li>
+        <li id="logsNav" title="Logs" class="<%if(hold==='logs'){%>liActive<%}else{%><%}%>"><a class="modSideNav" href="/administrator/logs"><i class="fa fa-history">&nbsp <span class="modFonts hidden-xs">Logs</span></i></a></li
+        <form>
+          <li id="signOutNav" class="modSticky" title="Sign out"><a class="modSideNav signOutBtn" href="#"><i class="fa fa-power-off">&nbsp <span class="modFonts hidden-xs">Sign out</span></i></a></li>
+        </form>
+      </ul>
+    </div>
+    <div class="col-sm-9 col-xs-11 modChildBody pre-scrollable">
+      <%if(hold==="admin"){%>
+        <%include ../partials/admin/admin-entries.ejs%>
+      <%} else if(hold==="students"){%>
+        <%include ../partials/admin/admin-students.ejs%>
+      <%} else if(hold==="teachers"){%>
+        <%include ../partials/admin/admin-teachers.ejs%>
+      <%} else if(hold==="enrolment"){%>
+        <%include ../partials/admin/admin-enrolment.ejs%>
+      <%} else if(hold==="subjects"){%>
+        <%include ../partials/admin/admin-subjects.ejs%>
+      <%} else if(hold==="schedules"){%>
+        <%include ../partials/admin/admin-schedules.ejs%>
+      <%} else if(hold==="users"){%>
+        <%include ../partials/admin/admin-users.ejs%>
+      <%} else if(hold==="settings"){%>
+        <%include ../partials/admin/admin-settings.ejs%>
+      <%} else if(hold==="reports"){%>
+        <%include ../partials/admin/admin-reports.ejs%>
+      <%} else if(hold==="logs"){%>
+        <%include ../partials/admin/admin-logs.ejs%>
+      <%}%>
+
+
+
+      <!--
+        This is the sub Partials condition
+      -->
+
+      <%if(hold==="user-add-new-user"){%>
+        <%include ../partials/sub-partials/admin/admin-add-users.ejs%>
+      <%}%>
+
+      <%if(hold==="user-add-subject"){%>
+        <%include ../partials/sub-partials/admin/admin-add-subjects.ejs%>
+      <%}%>
+
+      <%if(hold==="user-edit-subject"){%>
+        <%include ../partials/sub-partials/admin/admin-update-subjects.ejs%>
+      <%}%>
+
+      <%if(hold==="admin-schedules"){%>
+        <%include ../partials/sub-partials/admin/admin-add-schedules.ejs%>
+      <%}%>
+
+      <%if(hold==="add-strands"){%>
+        <%include ../partials/sub-partials/admin/admin-add-strands.ejs%>
+      <%}%>
+
+
+      <%if(hold==="add-teacher"){%>
+        <%include ../partials/sub-partials/admin/admin-add-teacher.ejs%>
+      <%}%>
+
+      <%if(hold==="settings-security" || hold==="settings-enrollment"){%>
+        <%include ../partials/admin/admin-settings.ejs%>
+      <%}%>
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+
+
+  <script>
+  $(document).ready(function(){
+
+    $('#signOutNav').click(function(){
+
+
+      var dt = new Date();
+      var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+      var date =  dt.getFullYear()+ "-"  + (dt.getMonth()+1)  + "-" + dt.getDate();
+
+      $.post("http://localhost:3000/logging-out", function(data){
+        window.location.href = "/logout";
+      });
+    });
+  });
+
+  </script>
+</body>
+</html>
+<style>
+
+
+.removeElement::-webkit-scrollbar { width: 0 !important }
+
+*{
+  padding:0;
+  margin:0;
+}
+
+.modHeaderParent{
+  margin:0;
+  padding-left:5px;
+  background-color:#263238;
+}
+
+.modSticky{
+  margin-bottom:50%;
+}
+.h2, .h3{
+  margin:0;
+  padding:10px 5px;
+  color:#A3AFB7;
+}
+
+.modFonts{
+  font-family:tahoma;
+  letter-spacing:2px;
+}
+
+.modFontsUser{
+  padding:0;
+  font-family:tahoma;
+  letter-spacing:1px;
+  color: #A3AFB7;
+  float:right;
+}
+
+.modFontsUser:hover{
+  font-family:tahoma;
+  letter-spacing:1px;
+  color: white;
+  text-decoration:none;
+}
+
+.liActive, .liActive i, .liActive .modFonts{
+  background-color:#37474F;
+  color:#B8D7FF;
+}
+
+.modSideNav{
+  width:100%;
+  display:block;
+  padding:6px 0;
+  margin-left:10px;
+  color:#A3AFB7;
+  font-size:16px;
+  font-family:arial;
+}
+
+.signOutBtn{
+  color:#FFBFC1;
+}
+
+.modParentNav li:hover{
+  background-color:#37474F;
+  transition:.5s;
+}
+
+.modParentNav li{
+  border-bottom:1px solid #37474f;
+  list-style:none;
+  margin:0;
+
+}
+
+.modSideNav:hover{
+  color:white;
+  transition:.5s;
+}
+
+
+.modHeaderContainer{
+  padding:0;
+}
+
+.modBodyContainer{
+  padding:0;
+  height:95vh;
+}
+
+.modChildBody{
+  height:100%;
+  max-height:92vh;
+  margin:0;
+  min-height:390px;
+}
+
+.modNav{
+  border-top:1px solid #37474F;
+  padding:0;
+  min-height:390px;
+  min-width:40px;
+}
+
+.modNav,  .modChildHead{
+  background-color:#263238;
+}
+
+</style>

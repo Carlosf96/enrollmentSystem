@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../assets/myStyle.css" type="text/css">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+
+  <div class="container">
+    <div class="row">
+
+      <div class="col-sm-3 hidden-xs">
+        <img src="../../assets/kagawaranNgEdukasyonLogo.png" class="img img-responsive modImageHeadOne hidden-sm">
+        <img src="../../assets/kagawaranNgEdukasyonLogo.png" class="img img-responsive modImageHeadTwo visible-sm">
+      </div>
+
+      <div class="col-sm-6">
+        <p class="text-center  hidden-sm modUnSmallPara">
+          <span class="modText"><b>BASIC EDUCATION ENROLLMENT FORM</b></span><br />
+          <span class="modLightText">
+            Division of City of San Fernando Pampanga<br />
+            <b>DOLORES STAND ALONE SENIOR HIGH SCHOOL</b><br />
+            Dolores City of San Fernando Pampanga<br />
+          </span>
+        </p>
+
+        <p class="text-left visible-sm modSmallPara">
+          <span class="modText"><b>BASIC EDUCATION ENROLLMENT FORM</b></span><br />
+          <span class="modLightText">
+            Division of City of San Fernando Pampanga<br />
+            <b>DOLORES STAND ALONE SENIOR HIGH SCHOOL</b><br />
+            Dolores City of San Fernando Pampanga<br />
+          </span>
+        </p>
+
+      </div>
+
+    </div>
+    <hr />
+
+    <div class="col-sm-12 modBg">
+      <h5>STUDENT INFORMATION</h5>
+
+    </div>
+    <form>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input type="text" class="form-control" id="psa" name="psa" placeholder="PSA Birth Certificate No..">
+        </div>
+      </div>
+
+      <div class="col-sm-12">
+        <b>SEX: &nbsp</b>
+        <label class="radio-inline"><input type="radio" name="optGender"  value="male" <%if(generate===true){%> <%if(data[0].gender==='male'){%><%-'checked'%><%}%><%}else{%><%-'checked'%><%}%>>MALE</label>
+        <label class="radio-inline"><input type="radio" name="optGender"  value="female" <%if(generate===true){%><%if(data[0].gender==='female'){%><%-'checked'%><%}%><%}%>>FEMALE</label>
+      </div>
+      </div><br />
+      <div class="row">
+        <div class="col-sm-6">
+          <b>Belonging to Indegenous People (IP) Community/Indegenous Cultural Comunity? &nbsp</b>
+          <label class="radio-inline"><input type="radio" name="optIp" id="indYes">YES</label>
+          <label class="radio-inline"><input type="radio" name="optIp" id="indNo" value="None" checked>NO</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <input type="text" class="form-control" id="tbIndType" placeholder="if YES, please specify" disabled>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="col-sm-12 modBg">
+        <h5>PARENT'S INFORMATION</h5>
+      </div>
+      <p>
+        <b>Father's Name:</b>
+      </p>
+
+
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <input type="text" class="form-control" id="fatherLastname" placeholder="Father's Lastname.." value="<%if(generate===true){%><%-data[0].fatherLastname%><%}%>" <%if(generate===true){%><%-'disabled'%><%}%>>
+        </div>
+        <div class="form-group col-sm-4">
+          <input type="text" class="form-control" id="fatherFirstname" placeholder="Father's Firstname.." value="<%if(generate===true){%><%-data[0].fatherFirstname%><%}%>" <%if(generate===true){%><%-'disabled'%><%}%>>
+        </div>
+        <div class="form-group col-sm-4">
+          <input type="text" class="form-control" id="fatherMiddlename" placeholder="Father's Middlename.." value="<%if(generate===true){%><%-data[0].fatherMiddlename%><%}%>" <%if(generate===true){%><%-'disabled'%><%}%>>
+        </div>
+      </div>
+      <p>
+        <b>Mother's Maiden Name:</b>
+      </p>
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <input type="text" class="form-control" id="motherLastname" placeholder="Mother's Lastname.." value="<%if(generate===true){%><%-data[0].motherLastname%><%}%>" <%if(generate===true){%><%-'disabled'%><%}%>>
+        </div>
+        <div class="form-group col-sm-4">
+          <input type="text" class="form-control" id="motherFirstname" placeholder="Mother's Firstname.." value="<%if(generate===true){%><%-data[0].motherFirstname%><%}%>" <%if(generate===true){%><%-'disabled'%><%}%>>
+        </div>
+        <div class="form-group col-sm-4">
+          <input type="text" class="form-control" id="motherMiddlename" placeholder="Mother's Middlename.." value="<%if(generate===true){%><%-data[0].motherMiddlename%><%}%>" <%if(generate===true){%><%-'disabled'%><%}%>>
+        </div>
+      </div>
+
+
+
+        <p class="text-justify modHereby">
+          I hereby certify that the above information given are true and correct to the best of my knowledge
+          and I allow the Department of Education to use my child's detailes to create and/or update his/her
+          learner profile in the Learner Information System. The information herein shall be treated as confidential
+          in compliance with the Data Privacy Act of 2012.
+        </p>
+        <div class="form-group col-sm-3 col-sm-offset-9">
+          <input type="submit" class="btn btn-success btn-block" value="Next">
+        </div>
+      </form>
+    </div>
+<script>
+$(document).ready(function(){
+
+  $('form').on('submit',function(){
+    var psa = $('#psa').val();
+    var gender = $('input[name="optGender"]:checked').val();
+    var indigenousPeople = $('input[name="optIp"]:checked').val();
+    var indigenousType = $('tbIndType').val();
+    var fatherLastname = $('#fatherLastname').val();
+    var fatherFirstname = $('#fatherFirstname').val();
+    var fatherMiddlename = $('#fatherMiddlename').val();
+    var motherLastname = $('#motherLastname').val();
+    var motherMiddlename = $('#motherMiddlename').val();
+    var motherFirstname = $('#motherFirstname').val();
+
+
+    $.post("http://localhost:3000/verifyForm3",{
+      psa: psa,
+      gender: gender,
+      indigenousPeople: indigenousPeople,
+      indigenousType: indigenousType,
+      fatherLastname: fatherLastname,
+      fatherFirstname: fatherFirstname,
+      fatherMiddlename: fatherMiddlename,
+      motherLastname: motherLastname,
+      motherMiddlename: motherMiddlename,
+      motherFirstname: motherFirstname
+    });
+      window.location.href = "new-student-third-form-enrollment";
+      return false;
+  })
+});
+
+  $(document).ready(function(){
+    $('#indYes').on('click',function(){
+      $('#tbIndType').removeAttr("disabled");
+      $('#tbIndType').attr('required', 'required');
+    });
+
+    $('#indNo').on('click',function(){
+      $('#tbIndType').val('');
+      $('#tbIndType').attr("disabled","disabled");
+      $('#tbIndType').attr("required","required");
+
+    });
+  });
+</script>
+</body>
+</html>
+<style>
+  .modText{
+    letter-spacing:1px;
+    color:rgb(60,60,60);
+    font-size:18px;
+    margin-top:20px;
+  }
+  .modBg{
+    background-color:#337eb8;
+    color:white;
+    margin-bottom:10px;
+  }
+  .modBg h5{
+    font-weight:bold;
+    font-size:16px;
+    margin:5px;
+  }
+  .modBorder{
+    border:1px solid rgb(220,210,220);
+  }
+  .modHereby{
+    color:rgb(110,110,110);
+  }
+
+  .modLightText{
+    color:rgb(120,120,120);
+  }
+
+  .modImageHeadOne{
+    width:170px;
+    margin-top:20px;
+  }
+
+  .modImageHeadTwo{
+    margin-top:10px;
+  }
+
+  .modUnSmallPara{
+    margin-top:50px;
+  }
+
+  .modSmallPara{
+    margin-top:30px;
+    border-left:1px solid rgb(220,220,220);
+    padding-left:30px;
+  }
+
+  input[type='text'] , input[type='submit']{
+    border-radius:0;
+  }
+  </style>

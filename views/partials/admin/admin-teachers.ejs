@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../assets/myStyle.css" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <title>Administrator</title>
+</head>
+<body>
+
+  <div class="row">
+
+
+    <div class="col-sm-5 col-sm-offset-7 col-xs-6">
+      <input type="text" id="myInput" class="form-control modBtnStrand btn-block" placeholder="Search Here..">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 modBorderTable">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th>Fullname</th>
+          </tr>
+        </thead>
+
+
+          <%teacher.forEach(function(user){%>
+          <tbody id="myTable">
+            <tr>
+              <td class="modTdTeacher" id="<%-user.idNumber%>"><a id="<%-user.firstname%>" class="btn"><span class="fa fa-plus"></a></span><span class="letterSpacing"> <%-user.firstname%> <%-user.middlename.charAt(0).toUpperCase()%>. <%-user.lastname%></span></td>
+            </tr>
+          </tbody>
+
+            <tr id="<%-user.lastname%><%-user.idNumber%>" hidden>
+              <td class="modTdSub">
+                <div class="table-responsive">
+                  <table class="table table-condensed modTable" width="100%">
+                    <tr>
+                      <th>Day</th>
+                      <th>Strands</th>
+                      <th>Subjects</th>
+                      <th>Time In</th>
+                      <th>Time Out</th>
+                    </tr>
+                    <%user2.forEach(function(user2){%>
+                      <%if(user2.teacher === user.idNumber){%>
+                        <tr class="modBgColorTd">
+                          <td><%-user2.day.slice(1)%></td>
+                          <td><%-user2.strand%></td>
+                          <td><%-user2.subject%></td>
+                          <td><%-user2.timeIn%></td>
+                          <td><%-user2.timeOut%></td>
+                        </tr>
+                      <%}%>
+                    <%});%>
+
+                  </table>
+                </div>
+
+              </td>
+            </tr>
+          <%})%>
+      </table>
+    </div>
+  </div>
+
+</body>
+
+<script>
+
+
+  $(document).ready(function(){
+
+    <%teacher.forEach(function(user){%>
+
+      var openSubject<%-user.idNumber%> = false;
+      $('#<%-user.idNumber%> a').click(function(){
+        if(openSubject<%-user.idNumber%>===false){
+          $('#<%-user.lastname%><%-user.idNumber%>').removeAttr('hidden');
+          openSubject<%-user.idNumber%> = true;
+          $('tr #<%-user.idNumber%>').css('backgroundColor','rgb(220,220,220)');
+
+        }else{
+
+          openSubject<%-user.idNumber%> = false;
+          $('#<%-user.lastname%><%-user.idNumber%>').attr('hidden','hidden');
+          $('tr #<%-user.idNumber%>').css('backgroundColor','white');
+
+        }
+
+      })
+    <%});%>
+
+  });
+
+
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+</html>
+
+<style>
+
+.modBtnStrand{
+  border-radius: 0;
+  margin-top:15px;
+}
+
+.modTbPadding{
+  padding-right:0;
+}
+
+.modBtnPadding{
+  padding-left:3px;
+}
+
+
+table tr th{
+  border:1px solid rgb(220,220,220);
+  padding-left:10px;
+  height:35px;
+  background-color:rgb(12, 140, 250);
+  color:white;
+}
+
+
+
+.modBorderTable{
+  margin-top:15px;
+}
+
+.modTdTeacher{
+  border:1px solid rgb(220,220,220);
+  padding-left:10px;
+  height:30px;
+  background-color:white;
+}
+
+
+.modTdTeacher .letterSpacing{
+  letter-spacing:2px;
+  font-size:15px;
+}
+
+.modTdSub{
+  padding-left:25px;
+  padding-bottom:25px;
+}
+
+.modBgColorTd{
+  background-color:white;
+}
+</style>

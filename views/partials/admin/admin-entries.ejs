@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../assets/myStyle.css" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <title>Administrator</title>
+</head>
+<body>
+  <div class="row">
+    <div class="col-sm-5 col-sm-offset-7 col-xs-6 modTbPadding">
+      <input type="text" id="myInput" class="form-control modBtnStrand btn-block" placeholder="Search Here..">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 modBorderTable table-responsive">
+      <table width="100%" class="table table-bordered">
+        <thead>
+          <tr>
+            <th>LRN</th>
+            <th>Fullname</th>
+            <th><center>Action</center></th>
+          </tr>
+        </thead>
+
+        <tbody id="myTable">
+          <%student.forEach(function(student){%>
+              <tr class="myTableRow">
+                <td><%-student.lrn%></td>
+                <td><%-student.firstname.charAt(0).toUpperCase()%><%-student.firstname.slice(1)%> <%-student.lastname.charAt(0).toUpperCase()%><%-student.lastname.slice(1)%></td>
+                <td>
+                  <center>
+                    <a href="/administrator/verify-new-student/<%-student._id%>" title="Verify"><span class="fa fa-folder-open"></span></a>
+                    <a href=""></a>
+                  </center>
+                </td>
+              </tr>
+          <%});%>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+
+<script>
+  $(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+</script>
+</html>
+
+
+<style>
+
+.modBtnStrand{
+  border-radius: 0;
+  margin-top:15px;
+}
+
+
+table tr th{
+  border:1px solid rgb(220,220,220);
+  padding-left:10px;
+  height:35px;
+  background-color:rgb(12, 140, 250);
+  color:white;
+}
+
+.myTableRow{
+  background-color:white;
+}
+
+
+
+.modBorderTable{
+  margin-top:15px;
+}
+</style>

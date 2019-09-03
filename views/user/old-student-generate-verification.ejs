@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../css/myStyle.css" type="text/css">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script src="../jQuery/modjQuery.js"></script>
+  <title>Document</title>
+</head>
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3 hidden-xs">
+          <img src="../../assets/doloresSchoolLogo.png" class="img img-responsive modImageHeadOne hidden-sm">
+          <img src="../../assets/doloresSchoolLogo.png" class="img img-responsive modImageHeadTwo visible-sm">
+      </div>
+      <div class="col-sm-6">
+        <p class="text-center modText modHeaderNew hidden-sm">
+          Republic of the Philippines<br />
+          Department of Education<br />
+          Region III<br />
+          Division of City of San Fernando Pampanga<br />
+          <b>DOLORES STAND ALONE SENIOR HIGH SCHOOL</b><br />
+          Dolores City of San Fernando Pampanga<br />
+          Tel No. (045)-402-5467<br />
+          <b>MAKA-DIYOS, MAKA-TAO, MAKAKALIKASAN, MAKABANSA</b>
+        </p>
+        <p class="text-left modText smallMod modHeaderNew visible-sm">
+          Republic of the Philippines<br />
+          Department of Education<br />
+          Region III<br />
+          Division of City of San Fernando Pampanga<br />
+          <b>DOLORES STAND ALONE SENIOR HIGH SCHOOL</b><br />
+          Dolores City of San Fernando Pampanga<br />
+          Tel No. (045)-402-5467<br />
+          <b>MAKA-DIYOS, MAKA-TAO, MAKAKALIKASAN, MAKABANSA</b>
+        </p>
+      </div>
+
+      <div class="col-sm-3 hidden-xs hidden-sm">
+        <img src="../../assets/kagawaranNgEdukasyonLogo.png" class="img img-responsive modImageHeadOne">
+      </div>
+
+    </div>
+    <hr />
+    <form>
+      <div class="row">
+        <div class="col-sm-8">
+          <b>Learner Reference Number:</b>
+          <input id="lrn" class="form-control btn-block modBorderRadius" type="text" value="<%-data[0].lrn%>" disabled>
+        </div>
+      </div><br class="hidden-xs"/>
+
+
+      <div class="row">
+        <div class="col-sm-4">
+          <b>Fullname:</b>
+          <input class="form-control btn-block modBorderRadius" id="fullname" type="text" value="<%-data[0].fullname%>" disabled>
+        </div>
+
+        <div class="col-sm-4">
+          <b>Contact Number:</b>
+          <input type="tel" id="phone" pattern="[0]{1}[9]{1}[0-9]{2}[0-9]{3}[0-9]{4}" class="form-control modBorderRadius" placeholder="Contact No.. (i.e 09123456789)" value="<%-data[0].phone%>">
+        </div>
+      </div><br class="hidden-xs">
+
+      <div class="row">
+        <div class="col-sm-2">
+          <b>Age:</b>
+          <input class="form-control btn-block modBorderRadius" type="text" id="age" value="<%-data[0].age%>">
+        </div>
+
+        <div class="col-sm-2">
+          <b>Section:</b>
+          <input class="form-control btn-block modBorderRadius" id="section" type="text" value="<%-data[0].section%>">
+        </div>
+
+
+        <div class="col-sm-4">
+          <b>Strand:</b>
+          <select id="strands" class="form-control btn-block modBorderRadius">
+            <%strands.forEach(function(strands){%>
+              <option <%if(strands.strands === data.strands){%><%-selected %><%}%> value="<%-strands.strands%>"><%-strands.strands%></option>
+            <%});%>
+          </select>
+        </div>
+
+      </div><br class="hidden-xs"/>
+
+
+
+      <div class="row">
+        <div class="col-sm-8">
+          <b>Current Address:</b>
+          <input class="form-control btn-block modBorderRadius" id="currentAddress" type="text" value="<%-data[0].currentAddress%>">
+        </div>
+      </div>
+      <hr />
+      <p class="h3">Guardian Information</p>
+
+      <div class="row">
+        <div class="col-sm-8">
+          <b>Fullname:</b>
+          <input class="form-control btn-block modBorderRadius" id="guardianFullname" type="text" value="<%-data[0].guardianFullname%>">
+        </div>
+      </div><br class="hidden-xs"/>
+
+
+      <div class="row">
+        <div class="col-sm-4">
+          <b>Relation to Learner:</b>
+          <input class="form-control btn-block modBorderRadius" id="guardianRelation" type="text" value="<%-data[0].guardianRelation%>">
+        </div>
+
+        <div class="col-sm-4">
+          <b>Contact Number:</b>
+          <input type="tel" id="guardianPhone" pattern="[0]{1}[9]{1}[0-9]{2}[0-9]{3}[0-9]{4}" class="form-control modBorderRadius" placeholder="Contact No.. (i.e 09123456789)" value="<%-data[0].guardianPhone%>">
+        </div>
+      </div><br class="hidden-xs">
+
+
+
+      <hr />
+      <p class="h3">Parent Information</p>
+      <p class="h4"><strong>Father Information</strong></p>
+      <div class="row">
+        <div class="col-sm-8">
+          <b>Fullname:</b>
+          <input class="form-control btn-block modBorderRadius" id="fatherFullname" type="text" value="<%-data[0].fatherFullname%>" disabled>
+        </div>
+      </div><br class="hidden-xs"/>
+
+
+      <div class="row">
+        <div class="col-sm-4">
+          <b>Occupation:</b>
+          <input class="form-control btn-block modBorderRadius" id="fatherOccupation" type="text" value="<%-data[0].fatherOccupation%>">
+        </div>
+
+        <div class="col-sm-4">
+          <b>Contact Number:</b>
+          <input type="tel" id="fatherPhone" pattern="[0]{1}[9]{1}[0-9]{2}[0-9]{3}[0-9]{4}" class="form-control modBorderRadius" placeholder="Contact No.. (i.e 09123456789)" value="<%-data[0].fatherPhone%>">
+        </div>
+      </div><br class="hidden-xs">
+
+      <div class="row">
+        <div class="col-sm-8">
+          <b>Current Address:</b>
+          <input class="form-control btn-block modBorderRadius" id="fatherAddress" type="text" value="<%-data[0].fatherAddress%>">
+        </div>
+      </div><br class="hidden-xs"/>
+
+
+
+      <p class="h4"><strong>Mother Information</strong></p>
+      <div class="row">
+        <div class="col-sm-8">
+          <b>Fullname:</b>
+          <input class="form-control btn-block modBorderRadius" id="motherFullname" type="text" value="<%-data[0].motherFullname%>" disabled>
+        </div>
+      </div><br class="hidden-xs"/>
+
+
+      <div class="row">
+        <div class="col-sm-4">
+          <b>Occupation:</b>
+          <input class="form-control btn-block modBorderRadius" id="motherOccupation" type="text" value="<%-data[0].motherOccupation%>">
+        </div>
+
+        <div class="col-sm-4">
+          <b>Contact Number:</b>
+          <input type="tel" id="motherPhone" pattern="[0]{1}[9]{1}[0-9]{2}[0-9]{3}[0-9]{4}" class="form-control modBorderRadius" placeholder="Contact No.. (i.e 09123456789)" value="<%-data[0].motherPhone%>">
+        </div>
+      </div><br class="hidden-xs">
+
+      <div class="row">
+        <div class="col-sm-8">
+          <b>Current Address:</b>
+          <input class="form-control btn-block modBorderRadius" id="motherAddress" type="text" value="<%-data[0].motherAddress%>">
+        </div>
+      </div><br class="hidden-xs"/>
+
+      <hr />
+      <p class="h3">Parent Status:</p>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="checkbox">
+          <label><input type="checkbox" value="living together">Living Together</label>
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox" value="permanently separated">Permanently Separated</label>
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox" value="legally separated">Legally Separated</label>
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox" value="father with another partner">Father with another Partner</label>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="checkbox">
+          <label><input type="checkbox" value="mother with another partner">Mother with another Partner</label>
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox" value="temporary separated">Temporary Separated</label>
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox" value="father ofw">Father OFW</label>
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox" value="mother ofw" >Mother OFW</label>
+          </div>
+        </div>
+      </div><br class="hidden-xs"/><hr>
+
+      <div class="row">
+        <div class="col-sm-3 col-sm-offset-5">
+          <button class="btn btn-success modBorderRadius btn-block modBtnMargin">Submit</button>
+        </div>
+      </div>
+    </form>
+
+
+
+
+
+
+
+
+  <script>
+
+  $(document).ready(function(){
+    var parentStatus = '';
+
+    $('form').on('submit',function(){
+
+
+      $. each($("input[type='checkbox']:checked"), function(){
+        parentStatus = parentStatus + "/ " + $(this).val();
+      });
+
+
+
+      $.post("http://localhost:3000/verifyForm-old-student",{
+        lrn: lrn,
+        fullname: fullname,
+        phone: phone,
+        age:age,
+        section: section,
+        strands: strands,
+        currentAddress: currentAddress,
+        guardianFullname: guardianFullname,
+        guardianRelation: guardianRelation,
+        guardianPhone: guardianPhone,
+        fatherOccupation: fatherOccupation,
+        fatherPhone: fatherPhone,
+        fatherAddress: fatherAddress,
+        motherOccupation: motherOccupation,
+        motherPhone: motherPhone,
+        motherAddress: motherAddress
+
+      }, function(data){
+        if(data==="done"){
+          window.location.href = "final-step-old-student";
+          return false;
+        }
+      });
+    })
+  });
+
+
+    $(document).ready(function(){
+      var same = true;
+      $('#cbAddress').on('click', function(){
+        if (same===true){
+          $('#tbPerAddress').attr("disabled", "disabled");
+          $('#tbPerAddress').val($('#tbCurAddress').val());
+          same = false;
+        }else{
+          $('#tbPerAddress').removeAttr("disabled")
+          $('#tbPerAddress').attr("required", "required");
+          $('#tbPerAddress').val('');
+          same = true;
+        }
+      })
+    });
+  </script>
+</body>
+</html>
+<style>
+
+  .modBtnMargin{
+    margin-bottom:20px;
+  }
+  .modBorderRadius{
+    border-radius:0;
+  }
+  .modText{
+    letter-spacing:1px;
+    color:rgb(60,60,60);
+  }
+  .modLine{
+    width:100%;
+    border-bottom:1px solid rgb(200,200,200);
+  }
+  .modMarginBtn{
+    margin-bottom:20px;
+  }
+  .modBg{
+    background-color:#337eb8;
+    color:white;
+    margin-bottom:20px;
+  }
+
+  .modBtn{
+    margin-bottom:5px;
+  }
+
+  .modColorCb{
+    color:rgb(120,120,120);
+  }
+
+  .modFamColor{
+    color:rgb(120,120,120);
+  }
+
+  .modHeaderNew{
+    margin-top:30px;
+  }
+
+  .modImageHeadOne{
+    margin-top:15px;
+    max-width:190px;
+  }
+
+  .modImageHeadTwo{
+    margin-top:55px;
+    max-width:190px;
+  }
+
+  .smallMod{
+    margin-left:30px;
+    padding-left:30px;
+    border-left:1px solid rgb(170,170,170);
+  }
+
+
+</style>

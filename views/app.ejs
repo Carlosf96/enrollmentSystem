@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../assets/myStyle.css" type="text/css">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script src='https://www.google.com/recaptcha/api.js'></script>
+  <title>Document</title>
+</head>
+<body>
+  <%include partials/user-navbar.ejs%>
+  <div class="col-sm-12">
+
+  </div>
+  <%if(settings[0].enrollmentStatus==='enable'){%>
+    <div class="container">
+      <div class="col-sm-8"></div>
+      <div class="col-sm-4 modPaddingForm">
+        <form id="subscribeForm">
+          <div class="form-group">
+            <select id="selectClassification" class="form-control btn-block modBtnStrands">
+              <option value="new student">New Student</option>
+              <option value="old student">Old Student</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <div class="g-recaptcha" data-sitekey="6LewQrMUAAAAAMy9B607CoA4NzlNPBNDC1yslbhO"></div>
+          </div>
+
+          <div class="checkbox">
+          <label class="text-justify modCbColor" id="labelOldStudent" hidden><input id="oldStudent" type="checkbox" value="oldStudent" disabled>Check this if you are an old student of DSASHS and you are first time to use this <strong>ONLINE ENROLLMENT SYSTEM</strong></label>
+          </div>
+
+          <div class="form-group">
+            <input type="submit" value="Enroll Now" class="btn btn-primary modBtnStrands">
+          </div>
+
+        </form>
+      </div>
+    </div>
+  <%}%>
+<script>
+
+  $(document).ready(function(){
+    $('#selectClassification').change(function(){
+
+      if($(this).val()==='old student'){
+        $("#oldStudent").removeAttr('disabled');
+        $('#labelOldStudent').removeAttr('hidden');
+      }else{
+        $("#oldStudent").prop("checked", false);
+        $("#oldStudent").attr('disabled','true');
+        $('#labelOldStudent').attr('hidden','true');
+      };
+
+    });
+  });
+  document.getElementById('subscribeForm').addEventListener('submit', submitForm);
+
+  var captcha = "";
+  var stuClass = "";
+
+  function submitForm(e){
+    e.preventDefault();
+
+    captcha = document.querySelector('#g-recaptcha-response').value;
+    stuClass = $('#selectClassification').val();
+    var oldStudent = $('#oldStudent:checked').val();
+
+    if (oldStudent === undefined){
+      oldStudent = 'existing';
+    }else if(oldStudent === 'oldStudent'){
+      oldStudent = 'newRecord';
+    }
+
+    alert(oldStudent);
+
+    fetch('/subscribe', {
+      method:'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-type':'application/json'
+      },
+      body:JSON.stringify({captcha: captcha, studentClass: stuClass, oldStudent: oldStudent})
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      window.location.href = "/student/first-form-enrollment";
+      return false;
+    });
+  }
+
+
+</script>
+
+</html>
+<style>
+
+.modCaptcha{
+  float:right;
+}
+  .modPaddingForm{
+    padding-right:0;
+  }
+  .modBtnStrands{
+    border-radius:0;
+  }
+  .modText{
+    letter-spacing:1px;
+    color:rgb(60,60,60);
+  }
+  .modLine{
+    width:100%;
+    border-bottom:1px solid rgb(200,200,200);
+  }
+  .modMarginBtn{
+    margin-bottom:20px;
+  }
+  .modBg{
+    background-color:#337eb8;
+    color:white;
+    margin-bottom:20px;
+  }
+
+  .modBtn{
+    margin-bottom:5px;
+  }
+
+  .modColorCb{
+    color:rgb(120,120,120);
+  }
+
+  .modFamColor{
+    color:rgb(120,120,120);
+  }
+
+  .modHeaderNew{
+    margin-top:30px;
+  }
+
+  .modImageHeadOne{
+    margin-top:15px;
+    max-width:190px;
+  }
+
+  .modBtnThird{
+    margin-bottom:20px;
+  }
+
+  .modImageHeadTwo{
+    margin-top:55px;
+    max-width:190px;
+  }
+  .smallMod{
+    margin-left:30px;
+    padding-left:30px;
+    border-left:1px solid rgb(170,170,170);
+  }
+
+  .modMarginForm2{
+    margin-top:10px;
+  }
+
+  .modMarginClass{
+    margin-bottom:20px;
+  }
+
+  .modCbColor{
+    color:rgb(120,120,120);
+  }
+</style>

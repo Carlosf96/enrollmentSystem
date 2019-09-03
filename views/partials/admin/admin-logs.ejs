@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../assets/myStyle.css" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <title>Administrator</title>
+</head>
+<body
+
+
+
+  <div class="row modTableContainerUser" id="tableViewMod">
+    <div class="col-sm-12 table-responsive">
+    <div class="col-sm-4 col-sm-offset-8 col-xs-3 col-xs-offset-9 modBtnLogs">
+
+      <div class="row">
+        <form>
+          <button id="clearLogs" title="Clear Logs" class="btn btn-danger modBtnStrands btn-block"><span class="fa fa-trash-o visible-xs"></span><span class="hidden-xs">Clear Logs</span></a>
+        </form>
+      </div>
+    </div>
+    <div class="col-sm-12 modPaddingTable table-responsive">
+      <table class="table" width="100%">
+          <tr class="modHeadTable">
+            <th>Username</th>
+            <th>Date In</th>
+            <th>Time In</th>
+            <th>Date Out</th>
+            <th>Time Out</th>
+          </tr>
+
+          <%user.forEach(function(data){%>
+            <tr>
+              <td><%-data.fullname%></td>
+              <td><%-data.date%></td>
+              <td><%-data.timeIn%></td>
+              <td><%-data.dateOut%></td>
+              <td><%-data.timeOut%></td>
+            </tr>
+          <%})%>
+      </table>
+    </div>
+  </div>
+</div>
+
+  <!--
+Post method to delete logs
+-->
+  <script>
+    $(document).ready(function(){
+
+      $('form').submit(function(){
+
+        $.post("http://localhost:3000/deleteLogs",{},function(data){
+          if(data==="done"){
+            window.location.href = "logs";
+            return false;
+          }
+        });
+      })
+    });
+  </script>
+
+
+</body>
+</html>
+<style>
+
+.modPaddingTable{
+  padding:0;
+}
+.modBtnLogs{
+  margin-top:10px;
+  margin-bottom:10px;
+}
+.modMarginPanel{
+  margin:0;
+  padding:0;
+}
+.addList , .delList{
+  font-size:20px;
+  color:rgb(190,190,190);
+  float:right;
+  padding:0;
+  margin:0;
+}
+.addList{
+  margin-right:10px;
+}
+.delList{
+  margin-right:10px;
+}
+.addList:hover{
+  color:rgb(168, 227, 166);
+}
+.delList:hover{
+  color:rgb(194, 129, 114);
+}
+.modBodyPanel{
+  max-height:500px;
+}
+.modBoxList{
+  width:100%;
+  border:1px solid rgb(200,200,200);
+  padding:5px;
+  background-color:white;
+  border-radius:10px;
+  height:180px;
+  margin-top:8px;
+}
+.modFullname{
+  color:rgb(12, 140, 250);
+  font-size:17px;
+  letter-spacing:2px;
+}
+.modNameHeader{
+  margin-left:15px;
+  color:rgb(77, 77, 77);
+}
+  .modInputSize{
+    margin-top:15px;
+
+  }
+  table{
+    background-color:white;
+    border:1px solid rgb(220,220,220);
+  }
+  tr,td{
+    border:1px solid rgb(220,220,220);
+  }
+  .modHeadTable, .modHeadTable th{
+    background-color:rgb(74, 140, 255);
+    border:1px solid rgb(220,220,220);
+    color:white;
+  }
+  .tblHoverMod:hover{
+    background-color:rgb(190,190,190);
+    color:white;
+    cursor:default;
+  }
+  .modTableContainerUser{
+    margin-top:10px;
+  }
+  .modTextContainerUser{
+    padding:0;
+  }
+  .add{
+    color:rgb(210, 210, 210);
+  }
+  .del{
+    color:rgb(210, 210, 210);
+  }
+  .add:hover{
+    color:rgb(168, 227, 166);
+  }
+  .del:hover{
+    color:rgb(194, 129, 114);
+  }
+  .modMargin{
+    margin-top:5px;
+  }
+
+  .modBtnStrands{
+    border-radius:0;
+  }
+</style>

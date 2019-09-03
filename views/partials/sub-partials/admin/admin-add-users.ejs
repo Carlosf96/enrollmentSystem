@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../assets/myStyle.css" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <title>Administrator</title>
+</head>
+<body>
+
+  <div class="panel">
+    <div class="panel-heading">Add Users</div>
+    <div class="panel-body">
+      <form>
+        <div class="row">
+          <div class="col-sm-4 modComboAddUser">
+            <input type="text" id="idNumber" class="form-control btn-block input-md" placeholder="Username/ID Number.." value='' required>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-4  modComboAddUser">
+            <input type="text" id="lastname" class="form-control btn-block input-md" placeholder="Lastname.." value="" required>
+          </div>
+
+          <div class="col-sm-4  modComboAddUser">
+            <input type="text" id="middlename" class="form-control btn-block input-md"  placeholder="Middlename.." value="" required>
+          </div>
+
+          <div class="col-sm-4  modComboAddUser">
+            <input type="text" class="form-control btn-block input-md" id="firstname" placeholder="Firstname.." value="" required>
+          </div>
+        </div>
+
+
+
+        <div class="row">
+          <div class="col-sm-6 modComboAddUser">
+            <select id="typeOfUser" class="form-control btn-block input-md">
+              <option value="Administrator">Administrator</option>
+              <option value="User">User</option>
+            </select>
+          </div>
+
+
+          <div class="col-sm-6 modComboAddUser">
+            <input type="tel" id="phoneNumber" pattern="[0]{1}[9]{1}[0-9]{2}[0-9]{3}[0-9]{4}" class="form-control" placeholder="Contact No.. (i.e 09123456789)" value="" required>
+          </div>
+
+        </div>
+
+
+        <div class="row">
+          <div class="col-sm-6 hidden-xs modComboAddUser">
+            <select id="gender" class="form-control btn-block input-md">
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-sm-6 modComboAddUser">
+            <input type="password" id="password" class="form-control btn-block input-md" placeholder="Password.." required>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6 modComboAddUser">
+            <input type="password" id="confirmPassword" class="form-control btn-block input-md" placeholder="Confirm Password.." required>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-sm-6 hidden-xs modComboAddUser">
+            <select id="statusTeach" class="form-control btn-block input-md">
+              <option value="teaching">Teaching</option>
+              <option value="non-teaching">Non-Teaching</option>
+            </select>
+          </div>
+        </div>
+
+
+        <hr class="hidden-xs"/>
+        <div class="row">
+          <div class="col-sm-2 col-sm-offset-8 col-xs-2 col-xs-offset-8 modComboAddUser">
+            <button title="Save" class="btn btn-success btn-block"><span class="fa fa-floppy-o visible-xs"></span><span class="hidden-xs">Save</span></button>
+          </div>
+
+          <div class="col-sm-2 col-xs-2 modComboAddUser">
+            <a href="/administrator/users" title="Cancel" class="btn btn-default btn-block"><span class="fa fa-sign-out visible-xs"></span><span class="hidden-xs">Cancel</span></a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+
+<script>
+
+$(document).ready(function(){
+
+  $(".close").click(function(){
+    $("#myAlertSuccess").alert("close");
+    $("#myAlertDanger").alert("close");
+  });
+
+  var genderTemp = "Male";
+  var adminTemp = "Administrator";
+
+  $('select#gender').change(function(){
+    genderTemp = $(this).children('option:selected').val();
+  });
+
+  $('select#typeOfUser').change(function(){
+    adminTemp = $(this).children('option:selected').val();
+  });
+
+
+  $('form').on('submit',function(){
+
+
+      var idNumber = $('#idNumber').val();
+      var lastname = $('#lastname').val();
+      var middlename = $('#middlename').val();
+      var firstname = $('#firstname').val();
+      var userType = adminTemp;
+      var phoneNumber = $('#phoneNumber').val();
+      var gender = genderTemp;
+      var teachingStatus = $('#statusTeach').val();
+
+
+
+      var password = $('#password').val();
+      var confirmPassword = $('#confirmPassword').val();
+
+      if (password === confirmPassword){
+
+        $.post("http://localhost:3000/save-user-data",{
+          idNumber: idNumber,
+          lastname: lastname,
+          middlename: middlename,
+          firstname: firstname,
+          userType: userType,
+          phoneNumber: phoneNumber,
+          gender: gender,
+          password: password,
+          confirmPassword: confirmPassword,
+          teachingStatus: teachingStatus
+        });
+          window.location.href="../users";
+          return false;
+
+      }else{
+
+        alert("Password did not matched");
+      }
+
+
+
+  })
+});
+
+
+</script>
+
+
+
+
+</body>
+</html>
+
+<style>
+
+  .modComboAddUser{
+    margin-top:5px;
+    padding:4px;
+  }
+</style>

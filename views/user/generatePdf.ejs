@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../assets/myStyle.css" type="text/css">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div class="container">
+    <div class="alert alert-warning">
+      <strong>NOTE: </strong> Make Sure that you already downloaded the PDF FILE before you PROCEED.
+    </div>
+
+    <form id="downloadPdfForm"  method="POST" action="/pdfMake/pdf">
+      <div class="col-sm-3 col-sm-offset-6">
+        <input type="submit" id="downloadBtn" value="Download PDF" class="btn btn-success btn-block">
+      </div>
+    </form>
+
+    <form id="enrollForm">
+      <div class="col-sm-3">
+        <input id="btnEnroll" type="submit" value="ENROLL" class="btn btn-primary btn-block" disabled>
+      </div>
+    </form>
+
+    <strong>REQUIREMENTS:</strong>
+    <div class="alert alert-info">
+      <strong>NEW STUDENTS: </strong><br />
+      <ul class="modUlMargin">
+        <li>SF9 (FORM 138)</li>
+        <li>PSA/NSO Birth Certificate</li>
+        <li>Good Moral Certificate</li>
+        <li>2x2 Pictures</li>
+        <li>NCAE Rating</li>
+        <li>Learner's Data Verification Form <i>(Provided by Online Enrollment System)</i></li>
+        <li>Basic Education Enrollment Form <i>(Provided by Online Enrollment System)</i></li>
+        <li>New Student Enrollment Form <i>(Provided by Online Enrollment System)</i></li>
+      </ul>
+    </div>
+
+
+
+
+    <div class="alert alert-info">
+      <strong>TRANSFEREE: </strong><br />
+      <ul class="modUlMargin">
+        <li>SF9 (FORM 138)</li>
+        <li>SF10 (FORM 137)</li>
+        <li>Good Moral Certificate</li>
+        <li>2x2 Pictures</li>
+        <li>NCAE Rating</li>
+        <li>Learner's Data Verification Form <i>(Provided by Online Enrollment System)</i></li>
+        <li>Basic Education Enrollment Form <i>(Provided by Online Enrollment System)</i></li>
+        <li>New Student Enrollment Form <i>(Provided by Online Enrollment System)</i></li>
+      </ul>
+    </div>
+
+
+
+    <div class="alert alert-info">
+      <strong>OLD STUDENTS: </strong><br />
+      <ul class="modUlMargin">
+        <li>SF9 (FORM 138)</li>
+        <li>Learner's Data Verification Form <i>(Provided by Online Enrollment System)</i></li>
+        <li>Basic Education Enrollment Form <i>(Provided by Online Enrollment System)</i></li>
+      </ul>
+    </div>
+
+
+  </div>
+
+</body>
+
+</html>
+<script>
+  $(document).ready(function(){
+    var dt = new Date();
+    var batch = dt.getFullYear();
+    var readyEnroll = false;
+
+    $("#downloadPdfForm").submit(function(){
+      readyEnroll = true;
+      if (readyEnroll === true){
+        $('#btnEnroll').removeAttr('disabled');
+      }
+    });
+
+    $("#enrollForm").submit(function(){
+      alert("ok");
+      readyEnroll = false;
+
+      $.post('http://localhost:3000/destroy-session',{
+        batch: batch
+      });
+      $('#btnEnroll').attr('disabled','true');
+      window.location.href = '../../';
+      return false;
+
+
+    });
+  });
+</script>
+<style>
+  .container{
+    margin-top: 20px;
+  }
+  #downloadPdfForm .col-sm-3
+  {
+    padding-right:3px;
+  }
+
+  #enrollForm .col-sm-3
+  {
+    padding-left:3px;
+  }
+
+  .modUlMargin{
+    margin-left:30px;
+  }
+</style>

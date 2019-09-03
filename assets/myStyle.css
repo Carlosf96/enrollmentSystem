@@ -1,0 +1,37 @@
+body{
+  background-image:url("../../assets/bg.png");
+  background-position:center;
+  height:100vh;
+  background-size:cover;
+}
+
+
+*{
+  margin:0;
+  padding:0;
+}
+h3{
+  padding:5px;
+  margin:0;
+}
+
+.panel{
+  margin:0;
+  margin-top:10px;
+  padding:0;
+  border-radius:0;
+
+}
+
+.panel-heading{
+  margin:0;
+  padding:2px;
+  padding-left:5px;
+  background-color: #247CF0;
+  font-size:16px;
+  letter-spacing:1px;
+  color:white;
+}
+.panel-body{
+  border:1px solid #CCD5DB;
+}

@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../assets/myStyle.css" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+  <title>Administrator</title>
+</head>
+<body>
+
+
+  <form id="enrollForm">
+    <div class="col-sm-8 col-sm-offset-2 modFormBg pre-scrollable">
+    <div class="col-sm-12 modHeaderEnroll">
+      <b><center>PERSONAL INFORMATION</center></b>
+    </div>
+    <div class="row">
+      <div class="col-sm-5 col-sm-offset-1">
+        <b>LRN:</b>
+        <input type="text" class="form-control btn-block modTextbox" id="lrn" value="<%-student[0].lrn%>">
+      </div>
+
+      <div class="col-sm-5">
+        <b>Fullname:</b>
+        <input type="text" class="form-control btn-block modTextbox" placeholder="LN, FN, MI.." id="fullname" value="<%-student[0].lastname.toLowerCase()%> / <%-student[0].firstname.toLowerCase()%> / <%-student[0].middlename.toLowerCase()%>">
+      </div>
+    </div>
+    <br class="hidden-xs"/>
+
+
+
+    <div class="row">
+      <div class="col-sm-5 col-sm-offset-1">
+        <b>Section:</b>
+        <input type="text" class="form-control btn-block modTextbox" value="<%-student[0].section%>" id="section">
+      </div>
+
+      <div class="col-sm-5">
+        <b>Strands:</b>
+        <select class="form-control btn-block modTextbox" id="strand">
+          <%strand.forEach(function(strand){%>
+            <option <%if(strand.strands === student[0].strand){%><%-'selected '%><%}%> value="<%-strand.strands%>"><%-strand.strands%></option>
+          <%})%>
+        </select>
+      </div>
+    </div>
+    <br class="hidden-xs"/>
+
+
+
+
+    <div class="row">
+      <div class="col-sm-5 col-sm-offset-1">
+        <b>Date of Birth:</b>
+        <input type="date" class="form-control btn-block modTextbox" id="dob" value="<%-student[0].dob%>" >
+      </div>
+
+      <div class="col-sm-5">
+        <b>Phone Number:</b>
+        <input type="tel" id="phone" pattern="[0]{1}[9]{1}[0-9]{2}[0-9]{3}[0-9]{4}"  value="<%-student[0].phone%>" class="form-control btn-block modTextbox" placeholder="Contact No.. (i.e 09123456789)">
+      </div>
+    </div>
+
+    <br class="hidden-xs"/>
+
+
+
+    <div class="row">
+      <div class="col-sm-5 col-sm-offset-1">
+        <b>Age:</b>
+        <input type="number" class="form-control btn-block modTextbox" id="age"  value="<%-student[0].age%>" placeholder="Age.." min=14 max=80>
+      </div>
+
+      <div class="col-sm-5">
+        <b>Gender:</b>
+        <select class="form-control btn-block modTextbox" id="gender">
+          <option <%if(student[0].gender==='male'){%><%-'selected '%><%}%> value="male">Male</option>
+          <option <%if(student[0].gender==='female'){%><%-'selected '%><%}%> value="female">Female</option>
+        </select>
+      </div>
+    </div>
+    <br class="hidden-xs"/>
+
+
+
+
+    <div class="row">
+      <div class="col-sm-10 col-sm-offset-1">
+        <b>Current Address:</b>
+        <input type="text" id="currentAddress" class="form-control btn-block modTextbox" value="<%-student[0].address%> <%-student[0].barangay%> <%-student[0].city%>" placeholder="address..">
+      </div>
+    </div><br />
+
+
+
+
+
+
+
+
+    <div class="col-sm-12 modHeaderEnroll">
+      <b><center>EDUCATION BACKGROUND</center></b>
+    </div>
+
+
+      <table class="table table-bordered" width="100%">
+        <thead>
+          <tr>
+            <th><center>School Name</center></th>
+            <th><center>Basic Education</center></th>
+            <th><center>Year Graduated</center></th>
+          </tr>
+        </thead>
+        <tr id="elementaryTr">
+          <td id="elemName"><%-student[0].elemName%></td>
+          <td id="elemDegree"><%-student[0].elemDegree%></td>
+          <td id="elemYear"><%-student[0].elemYear%></td>
+        </tr>
+
+        <tr id="highschoolTr">
+          <td id="hsName"><%-student[0].hsName%></td>
+          <td id="hsDegree"><%-student[0].hsDegree%></td>
+          <td id="hsYear"><%-student[0].hsYear%></td>
+        </tr>
+
+        <tr id="otherTr">
+          <td id="otherName"><%-student[0].othersName%></td>
+          <td id="otherDegree"><%-student[0].othersDegree%></td>
+          <td id="otherYear"><%-student[0].idYear%></td>
+        </tr>
+      </table>
+
+
+
+      <div class="col-sm-12 modHeaderEnroll">
+        <b><center>GUARDIAN INFORMATION</center></b>
+      </div>
+
+
+
+      <div class="row">
+        <div class="col-sm-5 col-sm-offset-1">
+          <b>Fullname:</b>
+          <input type="text" id="guardianFullname" class="form-control btn-block modTextbox" value="<%-student[0].lastnameGuardian%> / <%-student[0].firstnameGuardian%> / <%-student[0].middlenameGuardian%>">
+        </div>
+
+        <div class="col-sm-5">
+          <b>Relationship:</b>
+          <input type="text" id="guardianRelation" class="form-control btn-block modTextbox" value="<%-student[0].relationGuardian%>" placeholder="" id="">
+        </div>
+      </div>
+      <br class="hidden-xs"/>
+
+      <div class="row">
+        <div class="col-sm-5 col-sm-offset-1">
+          <b>Contact:</b>
+          <input type="tel" id="guardianPhone" pattern="[0]{1}[9]{1}[0-9]{2}[0-9]{3}[0-9]{4}" value="<%-student[0].phoneGuardian%>" class="form-control btn-block modTextbox" placeholder="Contact No.. (i.e 09123456789)">
+        </div>
+
+
+        <div class="col-sm-5">
+          <b>Occupation:</b>
+          <input type="text"  id="guardianOccupation" value="<%-student[0].occupationGuardian%>" class="form-control btn-block modTextbox">
+        </div>
+
+
+      </div>
+      <br class="hidden-xs"/>
+
+
+
+
+
+
+
+
+      <div class="col-sm-12 modHeaderEnroll">
+        <b><center>PARENT INFORMATION</center></b>
+      </div>
+
+
+      <p class="h4"><strong>Father Information</strong></p>
+      <div class="row">
+        <div class="col-sm-5 col-sm-offset-1">
+          <b>Fullname:</b>
+          <input type="text" class="form-control btn-block modTextbox" id="fatherFullname" value="<%-student[0].fatherLastname%> / <%-student[0].fatherFirstname%> / <%-student[0].fatherMiddlename%>">
+        </div>
+
+        <div class="col-sm-5">
+          <b>Contact:</b>
+          <input type="tel" id="fatherPhone" pattern="[0]{1}[9]{1}[0-9]{2}[0-9]{3}[0-9]{4}" class="form-control btn-block modTextbox" placeholder="Contact No.. (i.e 09123456789)" value="<%-student[0].fatherContact%>">
+        </div>
+      </div>
+      <br class="hidden-xs"/>
+
+
+
+      <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+          <b>Current Address:</b>
+          <input type="text" id="fatherAddress" class="form-control btn-block modTextbox" value="<%-student[0].fatherAddress%>">
+        </div>
+      </div>
+      <br class="hidden-xs"/>
+
+      <div class="row">
+        <div class="col-sm-5 col-sm-offset-1">
+          <b>Occupation:</b>
+          <input type="text"  id="fatherOccupation" value="<%-student[0].fatherOccupation%>" class="form-control btn-block modTextbox">
+        </div>
+
+        <div class="col-sm-5">
+          <b>Date of Birth:</b>
+          <input type="date" id="fatherDob" class="form-control btn-block modTextbox" value="<%-student[0].fatherDob%>" id="fatherDob" placeholder="Enter Birthdate.."  min="1960-01-01" max="2100-01-01" />
+        </div>
+      </div>
+      <br class="hidden-xs"/>
+
+
+      <p class="h4"><strong>Mother Information</strong></p>
+      <div class="row">
+        <div class="col-sm-5 col-sm-offset-1">
+          <b>Fullname:</b>
+          <input type="text" class="form-control btn-block modTextbox" id="motherFullname" value="<%-student[0].motherLastname%> / <%-student[0].motherFirstname%> / <%-student[0].motherMiddlename%>">
+        </div>
+
+        <div class="col-sm-5">
+          <b>Contact:</b>
+          <input type="tel" id="motherPhone" pattern="[0]{1}[9]{1}[0-9]{2}[0-9]{3}[0-9]{4}" class="form-control btn-block modTextbox" placeholder="Contact No.. (i.e 09123456789)" value="<%-student[0].motherContact%>">
+        </div>
+      </div>
+      <br class="hidden-xs"/>
+
+
+
+      <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+          <b>Current Address:</b>
+          <input type="text" class="form-control btn-block modTextbox" id="motherAddress" value="<%-student[0].motherAddress%>">
+        </div>
+      </div>
+      <br class="hidden-xs"/>
+
+      <div class="row">
+        <div class="col-sm-5 col-sm-offset-1">
+          <b>Occupation:</b>
+          <input type="text" class="form-control btn-block modTextbox" id="motherOccupation" value="<%-student[0].motherOccupation%>">
+        </div>
+
+        <div class="col-sm-5">
+          <b>Date of Birth:</b>
+          <input type="date" class="form-control btn-block modTextbox" id="motherDob" placeholder="Enter Birthdate.." value="<%-student[0].motherDob%>"  min="1960-01-01" max="2100-01-01" >
+        </div>
+      </div>
+      <br class="hidden-xs"/>
+
+
+
+
+      <p class="h4"><strong>Parent Status:</strong></p>
+      <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+          <b>Status:</b>
+          <input type="text" class="form-control btn-block modTextbox" id="parentStatus" value="<%-student[0].parentStatus%>">
+        </div>
+
+
+      </div>
+
+  <div>
+    <input type="text" class="hiddenTb" id="hiddenLastname" value="<%-student[0].lastname%>" disabled>
+    <input type="text" class="hiddenTb" id="hiddenFirstname"  value="<%-student[0].firstname%>" disabled>
+    <input type="text" class="hiddenTb" id="hiddenMiddlename" value="<%-student[0].middlename%>" disabled>
+
+    <input type="text" class="hiddenTb" id="hiddenGLastname" value="<%-student[0].lastnameGuardian%>" disabled>
+    <input type="text" class="hiddenTb" id="hiddenGFirstname"  value="<%-student[0].firstnameGuardian%>" disabled>
+    <input type="text" class="hiddenTb" id="hiddenGMiddlename" value="<%-student[0].middlenameGuardian%>" disabled>
+
+
+    <input type="text" class="hiddenTb" id="hiddenAddress" value="<%-student[0].address%>" disabled>
+    <input type="text" class="hiddenTb" id="hiddenBarangay"  value="<%-student[0].barangay%>" disabled>
+    <input type="text" class="hiddenTb" id="hiddenCity" value="<%-student[0].city%>" disabled>
+
+
+    <input type="text" class="hiddenTb" id="hiddenFLastname" value="<%-student[0].fatherLastname%>" disabled>
+    <input type="text" class="hiddenTb" id="hiddenFFirstname"  value="<%-student[0].fatherFirstname%>" disabled>
+    <input type="text" class="hiddenTb" id="hiddenFMiddlename" value="<%-student[0].fatherMiddlename%>" disabled>
+
+
+    <input type="text" class="hiddenTb" id="hiddenMLastname" value="<%-student[0].motherLastname%>" disabled>
+    <input type="text" class="hiddenTb" id="hiddenMFirstname"  value="<%-student[0].motherFirstname%>" disabled>
+    <input type="text" class="hiddenTb" id="hiddenMMiddlename" value="<%-student[0].motherMiddlename%>" disabled>
+
+
+    <input type="text" class="hiddenTb" id="hiddenPsa" value="<%-student[0].psa%>" disabled>
+    <input type="text" class="hiddenTb" id="hiddenPob" value="<%-student[0].pob%>" disabled>
+    <input type="text" class="hiddenTb" id="hiddenReligion" value="<%-student[0].tbReligion%>" disabled>
+    <input type="text" class="hiddenTb" id="hiddenPerAddress" value="<%-student[0].tbPerAddress%>" disabled>
+    <input type="text" class="hiddenTb" id="hiddenCurAddress" value="<%-student[0].tbCurAddress%>" disabled>
+
+    <input type="text" class="hiddenTb" id="hiddenFatherBusAddress" value="<%-student[0].fatherBusinessAdd%>" disabled>
+    <input type="text" class="hiddenTb" id="hiddenMotherBusAddress" value="<%-student[0].motherBusinessAdd%>" disabled>
+
+
+  </div>
+
+
+  </div>
+  <div class="col-sm-8 col-sm-offset-2 modborderButton">
+      <div class="col-sm-4 col-sm-offset-8 modPaddingBtn">
+        <button class="btn btn-success btn-block btnModEnroll">Enroll</button>
+      </div>
+  </div>
+
+  </form>
+</body>
+
+<script>
+  $(document).ready(function(){
+
+    var dt = new Date();
+    var batch = dt.getFullYear();
+
+
+
+    $('#enrollForm').submit(function(){
+      var lrn = $('#lrn').val();
+      var fullname = $('#fullname').val();
+      var lastname = $('#hiddenLastname').val();
+      var firstname = $('#hiddenFirstname').val();
+      var middlename = $('#hiddenMiddlename').val();
+      var section = $('#section').val();
+      var strand = $('#strand').val();
+      var dob = $('#dob').val();
+      var phone = $('#phone').val();
+      var age = $('#age').val();
+      var gender = $('#gender').val();
+      var currentAddress = $('#currentAddress').val();
+
+      var houseNumber = $('#hiddenAddress').val();
+      var barangay = $('#hiddenBarangay').val();
+      var city = $('#hiddenCity').val();
+
+
+      var elemName = $('#elementaryTr #elemName').text();
+      var elemDegree = $('#elementaryTr #elemDegree').text();
+      var elemYear = $('#elementaryTr #elemYear').text();
+      var hsName = $('#highschoolTr #hsName').text();
+      var hsDegree = $('#highschoolTr #hsDegree').text();
+      var hsYear = $('#highschoolTr #hsYear').text();
+      var otherName = $('#otherTr #otherName').text();
+      var otherDegree = $('#otherTr #otherDegree').text();
+      var otherYear = $('#otherTr #otherYear').text();
+      var guardianFullname = $('#guardianFullname').val();
+
+      var gLastname = $('#hiddenGLastname').val();
+      var gFirstname = $('#hiddenGFirstname').val();
+      var gMiddlename = $('#hiddenGMiddlename').val();
+
+      var guardianRelation = $('#guardianRelation').val();
+      var guardianPhone = $('#guardianPhone').val();
+      var guardianOccupation = $('#guardianOccupation').val();
+      var fatherFullname = $('#fatherFullname').val();
+
+      var fLastname = $('#hiddenFLastname').val();
+      var fFirstname = $('#hiddenFFirstname').val();
+      var fMiddlename = $('#hiddenFMiddlename').val();
+
+
+      var fatherPhone = $('#fatherPhone').val();
+      var fatherAddress = $('#fatherAddress').val();
+
+
+
+      var fatherOccupation = $('#fatherOccupation').val();
+      var fatherDob = $('#fatherDob').val();
+      var motherFullname = $('#motherFullname').val();
+
+      var mLastname = $('#hiddenMLastname').val();
+      var mFirstname = $('#hiddenMFirstname').val();
+      var mMiddlename = $('#hiddenMMiddlename').val();
+
+      var motherPhone = $('#motherPhone').val();
+      var motherAddress = $('#motherAddress').val();
+      var motherOccupation = $('#motherOccupation').val();
+      var motherDob = $('#motherDob').val();
+      var parentStatus = $('#parentStatus').val();
+
+
+      var hiddenPsa = $('#hiddenPsa').val();
+      var hiddenPob = $('#hiddenPob').val();
+      var hiddenReligion = $('#hiddenReligion').val();
+      var hiddenPerAddress = $('#hiddenPerAddress').val();
+      var hiddenCurAddress = $('#hiddenCurAddress').val();
+
+      var hiddenFatherBusAddress = $('#hiddenFatherBusAddress').val();
+      var hiddenMotherBusAddress = $('#hiddenMotherBusAddress').val();
+
+
+
+      $.post('http://localhost:3000/enroll-student-success',{
+        lrn: lrn,
+        fullname: fullname,
+        lastname: lastname,
+        firstname: firstname,
+        middlename: middlename,
+        section: section,
+        strand: strand,
+        dob:dob,
+        phone: phone,
+        age: age,
+        gender: gender,
+        currentAddress: currentAddress,
+        houseNumber: houseNumber,
+        barangay: barangay,
+        city: city,
+        elemName: elemName,
+        elemDegree: elemDegree,
+        elemYear: elemYear,
+        hsName: hsName,
+        hsDegree: hsDegree,
+        hsYear: hsYear,
+        otherName: otherName,
+        otherDegree: otherDegree,
+        otherYear: otherYear,
+        guardianFullname: guardianFullname,
+        gLastname: gLastname,
+        gFirstname: gFirstname,
+        gMiddlename: gMiddlename,
+        guardianRelation: guardianRelation,
+        guardianPhone: guardianPhone,
+        guardianOccupation: guardianOccupation,
+        fatherFullname: fatherFullname,
+        fLastname: fLastname,
+        fFirstname: fFirstname,
+        fMiddlename: fMiddlename,
+        fatherPhone: fatherPhone,
+        fatherAddress: fatherAddress,
+        fatherOccupation: fatherOccupation,
+        fatherDob: fatherDob,
+        motherFullname: motherFullname,
+        mLastname: mLastname,
+        mFirstname: mFirstname,
+        mMiddlename: mMiddlename,
+        motherPhone: motherPhone,
+        motherAddress: motherAddress,
+        motherOccupation: motherOccupation,
+        motherDob: motherDob,
+        parentStatus: parentStatus,
+
+        hiddenPsa: hiddenPsa,
+        hiddenPob: hiddenPob,
+        hiddenReligion: hiddenReligion,
+        hiddenPerAddress: hiddenPerAddress,
+        hiddenCurAddress: hiddenCurAddress,
+
+        hiddenFatherBusAddress: hiddenFatherBusAddress,
+        hiddenMotherBusAddress: hiddenMotherBusAddress,
+
+        batch: batch
+      });
+      window.location.href="/administrator/students";
+      return false;
+    });
+
+  });
+</script>
+</html>
+
+<style>
+
+  .hiddenTb{
+    background-color:white;
+    color:white;
+    border:1px solid white;
+    float:right;
+    position:relative;
+    width:1px;
+    height:1px;
+    font-size:1px;
+  }
+
+  button.btnModEnroll{
+    border-radius:0;
+  }
+
+  .modPaddingBtn{
+    padding-right:30px;
+    padding-top:10px;
+    padding-bottom:10px;
+  }
+  .modTextbox{
+    border-radius:0;
+    margin-bottom:5px;
+  }
+
+  .modFormBg{
+    background-color:white;
+    border:1px solid rgb(160,160,160);
+    min-height:570px;
+    padding-top:15px;
+    margin-top:20px;
+  }
+
+  .modHeaderEnroll{
+    background-color:rgb(88, 151, 232);
+    color:white;
+    height:30px;
+    line-height:30px;
+    margin-bottom:15px;
+  }
+
+  .modborderButton{
+
+    border:1px solid rgb(160,160,160);
+    border-top:none;
+    padding:2px;
+    background-color:white;
+  }
+</style>

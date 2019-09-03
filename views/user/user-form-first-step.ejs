@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../assets/myStyle.css" type="text/css">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+
+      <div class="col-sm-3 hidden-xs">
+        <img src="../../assets/doloresSchoolLogo.png" class="img img-responsive modImageHeadOne hidden-sm">
+        <img src="../../assets/doloresSchoolLogo.png" class="img img-responsive modImageHeadTwo visible-sm">
+      </div>
+      <div class="col-sm-6">
+
+
+        <p class="text-center modText modHeaderNew hidden-sm">
+          Republic of the Philippines<br />
+          Department of Education<br />
+          Region III<br />
+          Division of City of San Fernando Pampanga<br />
+          <b>DOLORES STAND ALONE SENIOR HIGH SCHOOL</b><br />
+          Dolores City of San Fernando Pampanga<br />
+          Tel No. (045)-402-5467<br />
+        </p>
+        <p class="text-left modText smallMod modHeaderNew visible-sm">
+          Republic of the Philippines<br />
+          Department of Education<br />
+          Region III<br />
+          Division of City of San Fernando Pampanga<br />
+          <b>DOLORES STAND ALONE SENIOR HIGH SCHOOL</b><br />
+          Dolores City of San Fernando Pampanga<br />
+          Tel No. (045)-402-5467<br />
+        </p>
+      </div>
+      <div class="col-sm-3 hidden-xs hidden-sm">
+        <img src="../../assets/kagawaranNgEdukasyonLogo.png" class="img img-responsive modImageHeadOne">
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+       <div class="col-sm-12 modBg">
+         <h4 class="text-center">LEARNERS DATA VERIFICATION FORM</h4>
+       </div>
+      <form>
+        <div class="row">
+
+        <div class="col-sm-12">
+          <p>
+            <b>Learner's Information:</b>
+          </p>
+        </div>
+        <div class="form-group col-sm-4">
+          <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter Lastname.." value="<%if(generate===true){%><%-data[0].lastname%><%}%>" <%if(generate===true){%><%-'disabled'%><%}%>>
+        </div>
+        <div class="form-group col-sm-4">
+          <input type="text" class="form-control" id="firstname" placeholder="Enter Firstname.." value="<%if(generate===true){%><%-data[0].firstname%><%}%>" <%if(generate===true){%><%-'disabled'%><%}%>>
+        </div>
+        <div class="form-group col-sm-4">
+          <input type="text" class="form-control" id="middlename" placeholder="Enter Middlename.."  value="<%if(generate===true){%><%-data[0].middlename%><%}%>" <%if(generate===true){%><%-'disabled'%><%}%>>
+        </div>
+        <div class="form-group col-sm-4">
+            <input type="number" min="14" max="70" class="form-control" id="age" placeholder="Enter Age" value="<%if(generate===true){%><%-data[0].age%><%}%>">
+        </div>
+        <div class="form-group col-sm-4 col-sm-offset-4">
+          <input type="date" class="form-control" id="dob" placeholder="Enter Birthdate.." min="1960-01-01" max="2100-01-01" value="<%if(generate===true){%><%-data[0].dob%><%}%>">
+        </div>
+        <div class="form-group col-sm-4">
+          <input type="text" class="form-control" id="lrn" placeholder="Enter LRN.." value="<%if(generate===true){%><%-data[0].lrn%><%}%>">
+        </div>
+        <div class="form-group col-sm-4 col-sm-offset-4">
+          <select class="form-control" id="yearLevel">
+            <option value="grade 11">Grade 11</option>
+            <option value="grade 12">Grade 12</option>
+          </select>
+        </div>
+        <div class="form-group col-sm-4">
+          <br />
+          <input type="tel" id="phone" pattern="[0]{1}[9]{1}[0-9]{2}[0-9]{3}[0-9]{4}" class="form-control" placeholder="Contact No.. (i.e 09123456789)" value="<%if(generate===true){%><%-data[0].phone%><%}%>">
+        </div>
+
+
+        <div class="form-group col-sm-4 col-sm-offset-4">
+          <b>Strands:</b>
+          <select class="form-control" id="strand">
+            <%strands.forEach(function(strands){%>
+              <option <%if(strands.strands===data[0].strand){%><%-"selected "%><%}%> value="<%-strands.strands%>"><%-strands.strands%></option>
+            <%});%>
+          </select>
+        </div>
+
+        <div class="col-sm-12">
+          <p>
+            <b>Complete Address:</b>
+          </p>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <input type="text" class="form-control" id="address" placeholder="House Number and Street.." value="<%if(generate===true){%><%-data[0].houseNumber%><%}%>">
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <input type="text" class="form-control" id="barangay" placeholder="Barangay.." value="<%if(generate===true){%><%-data[0].barangay%><%}%>">
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <input type="text" class="form-control" id="city" placeholder="City/Municipality/Province.." value="<%if(generate===true){%><%-data[0].city%><%}%>">
+          </div>
+        </div>
+
+        <div class="col-sm-12">
+          <p>
+            <b>Guardian's Information:</b>
+          </p>
+        </div>
+
+        <div class="form-group col-sm-4">
+          <input type="text" class="form-control" id="lastnameGuardian" placeholder="Enter Lastname.." value="<%if(generate===true){%><%-data[0].guardianLastname%><%}%>">
+        </div>
+        <div class="form-group col-sm-4">
+          <input type="text" class="form-control" id="firstnameGuardian" placeholder="Enter Firstname.." value="<%if(generate===true){%><%-data[0].guardianFirstname%><%}%>">
+        </div>
+        <div class="form-group col-sm-4">
+          <input type="text" class="form-control" id="middlenameGuardian" placeholder="Enter Middlename.." value="<%if(generate===true){%><%-data[0].guardianMiddlename%><%}%>">
+        </div>
+        <div class="form-group col-sm-6">
+          <input type="text" class="form-control" id="relationGuardian" placeholder="Relationship to the Learner.." value="<%if(generate===true){%><%-data[0].guardianRelation%><%}%>">
+        </div>
+        <div class="form-group col-sm-6">
+          <input type="tel" class="form-control" id="phoneGuardian" pattern="[0]{1}[9]{1}[0-9]{2}[0-9]{3}[0-9]{4}" class="form-control" placeholder="Guardian's Contact No  (i.e 09123456789)" value="<%if(generate===true){%><%-data[0].guardianPhone%><%}%>">
+        </div>
+        <div class="form-group col-sm-6">
+          <input type="text" class="form-control" id="occupationGuardian" placeholder="Guardian's Occupation.." value="<%if(generate===true){%><%-data[0].guardianOccupation%><%}%>">
+        </div>
+
+        <br />
+      <div class="col-sm-3 col-sm-offset-9 modMarginBtn">
+        <input type="submit" class="btn btn-success btn-block" value="Next">
+      </div>
+      </form>
+    </div>
+  </div>
+  <script>
+
+
+
+  $(document).ready(function(){
+
+
+    $('form').on('submit',function(){
+
+      var lastname = $('#lastname').val();
+      var firstname = $('#firstname').val();
+      var middlename = $('#middlename').val();
+      var age = $('#age').val();
+      var dob = $('#dob').val();
+      var lrn = $('#lrn').val();
+      var yearLevel = $('#yearLevel').val();
+      var phone = $('#phone').val();
+      var strand = $('#strand').val();
+      var address = $('#address').val();
+      var barangay = $('#barangay').val();
+      var city = $('#city').val();
+      var lastnameGuardian = $('#lastnameGuardian').val();
+      var firstnameGuardian = $('#firstnameGuardian').val();
+      var middlenameGuardian = $('#middlenameGuardian').val();
+      var relationGuardian = $('#relationGuardian').val();
+      var phoneGuardian = $('#phoneGuardian').val();
+      var occupationGuardian = $('#occupationGuardian').val();
+
+      $.post("http://localhost:3000/verify",{
+
+        lastname :lastname,
+        firstname :firstname,
+        middlename :middlename,
+        age :age,
+        dob :dob,
+        lrn :lrn,
+        yearLevel :yearLevel,
+        phone :phone,
+        strand :strand ,
+        address :address ,
+        barangay:barangay,
+        city :city ,
+        lastnameGuardian:lastnameGuardian,
+        firstnameGuardian :firstnameGuardian,
+        middlenameGuardian :middlenameGuardian,
+        relationGuardian :relationGuardian,
+        phoneGuardian :phoneGuardian,
+        occupationGuardian :occupationGuardian
+      });
+        window.location.href = "second-form-enrollment";
+        return false;
+    })
+  });
+
+
+  </script>
+</body>
+</html>
+<style>
+input.form-control, select.form-control{
+  border-radius:0;
+  padding-left:5px;
+}
+
+input[type="submit"]{
+  border-radius:0;
+}
+  .modText{
+    letter-spacing:1px;
+    color:rgb(60,60,60);
+  }
+  .modLine{
+    width:100%;
+    border-bottom:1px solid rgb(200,200,200);
+  }
+  .modMarginBtn{
+    margin-bottom:20px;
+  }
+  .modBg{
+    background-color:#337eb8;
+    color:white;
+    margin-bottom:20px;
+  }
+
+  .modBtn{
+    margin-bottom:5px;
+  }
+
+  .modColorCb{
+    color:rgb(120,120,120);
+  }
+
+  .modFamColor{
+    color:rgb(120,120,120);
+  }
+
+  .modHeaderNew{
+    margin-top:30px;
+  }
+
+  .modImageHeadOne{
+    margin-top:15px;
+    max-width:190px;
+  }
+
+  .modBtnThird{
+    margin-bottom:20px;
+  }
+
+  .modImageHeadTwo{
+    margin-top:55px;
+    max-width:190px;
+  }
+  .smallMod{
+    margin-left:30px;
+    padding-left:30px;
+    border-left:1px solid rgb(170,170,170);
+  }
+
+  .modMarginForm2{
+    margin-top:10px;
+  }
+
+  .modMarginClass{
+    margin-bottom:20px;
+  }
+</style>

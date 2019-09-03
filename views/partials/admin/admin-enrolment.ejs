@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../assets/myStyle.css" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <title>Administrator</title>
+</head>
+<body>
+  <div class="col-sm-12">
+    <div class="col-sm-6 col-sm-offset-6 modPaddingStrand col-xs-8 col-xs-offset-4">
+      <select class="form-control btn-block modTextbox" id="viewsTable">
+        <option <%if(viewStatus[0].viewStatus ==='all'){%>selected<%}%> value="all">All</option>
+        <option <%if(viewStatus[0].viewStatus ==='tracks'){%>selected<%}%> value="tracks">Tracks</option>
+        <option <%if(viewStatus[0].viewStatus ==='strands'){%>selected<%}%> value="strands">Strands</option>
+        <option <%if(viewStatus[0].viewStatus ==='section'){%>selected<%}%> value="section">Section</option>
+      </select>
+    </div>
+  </div>
+
+
+    <div class="col-sm-12 col-xs-12">
+      <div class="col-sm-3 modPaddingStrand col-sm-offset-3 col-xs-4">
+        <a href="/administrator/strands/add-section" class="btn btn-primary btn-block modBtnStrands">Add Section</a>
+      </div>
+
+
+      <div class="col-sm-3 modPaddingStrand col-xs-4">
+        <a href="/administrator/strands/add-strands" class="btn btn-primary btn-block modBtnStrands">Add Strands</a>
+      </div>
+
+      <div class="col-sm-3 modPaddingStrand col-xs-4">
+        <a href="/administrator/strands/add-tracks" class="btn btn-primary btn-block modBtnStrands">Add Tracks</a>
+      </div>
+    </div>
+
+    <%if(viewStatus[0].viewStatus ==='tracks'){%>
+      <div class="col-sm-12 table-responsive modPaddingTable modTopMargin">
+        <table class="table modTableTracks" width="100%">
+          <tr>
+            <th>
+              Tracks
+            </th>
+          </tr>
+          <%tracks.forEach(function(tracks){%>
+            <tr>
+              <td>
+                <%-tracks.tracks%>
+              </td>
+            </tr>
+          <%})%>
+        </table>
+      </div>
+    <%}%>
+
+
+    <%if(viewStatus[0].viewStatus ==='strands'){%>
+      <div class="col-sm-12 table-responsive modPaddingTable modTopMargin">
+        <table class="table modTableTracks" width="100%">
+          <tr>
+            <th>
+              Strands
+            </th>
+            <th>
+              Tracks
+            </th>
+          </tr>
+          <%strands.forEach(function(strands){%>
+            <tr>
+              <td>
+                <%-strands.strands%>
+              </td>
+              <td>
+                <%-strands.tracks%>
+              </td>
+            </tr>
+          <%})%>
+        </table>
+      </div>
+    <%}%>
+
+
+    <%if(viewStatus[0].viewStatus ==='section'){%>
+      <div class="col-sm-12 table-responsive modPaddingTable modTopMargin">
+        <table class="modTableTracks" width="100%">
+          <tr>
+            <th>
+              Section
+            </th>
+            <th>
+              Strands
+            </th>
+          </tr>
+          <%section.forEach(function(section){%>
+            <tr>
+              <td>
+                <%-section.section.toUpperCase()%>
+              </td>
+              <td>
+                <%-section.strand%>
+              </td>
+            </tr>
+          <%})%>
+        </table>
+      </div>
+    <%}%>
+
+
+
+
+
+    <%if(viewStatus[0].viewStatus ==='all'){%>
+
+      <div class="col-sm-12 table-responsive modPaddingTable modTopMargin">
+        <table class="modTableTracks" width="100%">
+          <tr>
+            <th>
+              Section
+            </th>
+            <th>
+              Strands
+            </th>
+          </tr>
+          <%section.forEach(function(section){%>
+            <tr>
+              <td>
+                <%-section.section.toUpperCase()%>
+              </td>
+              <td>
+                <%-section.strand%>
+              </td>
+            </tr>
+          <%})%>
+        </table>
+      </div>
+
+
+      <div class="col-sm-12 table-responsive modPaddingTable modTopMargin">
+        <table class="table modTableTracks" width="100%">
+          <tr>
+            <th>
+              Strands
+            </th>
+            <th>
+              Tracks
+            </th>
+          </tr>
+          <%strands.forEach(function(strands){%>
+            <tr>
+              <td>
+                <%-strands.strands%>
+              </td>
+              <td>
+                <%-strands.tracks%>
+              </td>
+            </tr>
+          <%})%>
+        </table>
+      </div>
+
+
+
+      <div class="col-sm-12 table-responsive modPaddingTable modTopMargin">
+        <table class="modTableTracks" width="100%">
+          <tr>
+            <th>
+              Tracks
+            </th>
+          </tr>
+          <%tracks.forEach(function(tracks){%>
+            <tr>
+              <td>
+                <%-tracks.tracks%>
+              </td>
+            </tr>
+          <%})%>
+        </table>
+      </div>
+    <%}%>
+
+
+
+
+
+
+
+
+
+    <script>
+      $(document).ready(function(){
+        $('#viewsTable').change(function(){
+          var cbValue = $(this).val();
+
+          $.post('http://localhost:3000/change-table-view',{
+            views: cbValue
+          });
+          location.reload();
+          return false;
+        });
+      });
+    </script>
+</body>
+</html>
+
+
+<style>
+
+table th{
+  border:1px solid rgb(230,230,230);
+}
+
+  .modBtnStrands{
+    border-radius:0;
+  }
+
+  .modPaddingStrand{
+    padding:5px;
+  }
+
+  .modPaddingTable{
+    padding-right:20px;
+  }
+
+  .modPaddingTable table tr th{
+    height:35px;
+    padding-left:10px;
+    color:white;
+    background-color:rgb(74, 140, 255);
+  }
+
+  .modPaddingTable table tr td{
+    height:30px;
+    padding-left:12px;
+    border:1px solid rgb(230,230,230);
+    background-color:white;
+  }
+
+  .modTopMargin{
+    margin-top:10px;
+  }
+
+  .modTextbox{
+    border-radius:0;
+  }
+</style>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../assets/myStyle.css" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <title>Administrator</title>
+</head>
+<body>
+    <h3 class="modHeadings">
+      <%-user[0].firstname.charAt(0).toUpperCase()
+      + user[0].firstname.slice(1) +
+      " " + user[0].lastname.charAt(0).toUpperCase()
+      + user[0].lastname.slice(1)%>
+      <span class="modUsername">(<%-user[0].idNumber%>)</span>
+    </h3>
+    <p class="modParaGraph"><%-user[0].userType%></p>
+      <div class="btn-group">
+        <a href="/administrator/settings/security" id="btnSecurity" class="btn <%if(option==='settings-security'){%><%-'disabled '%><%}else{%><%-'btn-default'%><%}%> modBtnGroup">Security</a>
+        <a href="/administrator/settings/enrollment" class="btn <%if(option==='settings-enrollment'){%><%-'disabled '%><%}else{%><%-'btn-default'%><%}%> modBtnGroup">Enrollment</a>
+      </div>
+
+<%if(option==='settings-security'){%>
+  <form id="securityForm">
+    <div class="row modRowsSettings">
+      <div class="col-sm-6 modPaddingTextBox">
+        <input type="password" id="oldPassword" class="form-control btn-block modTbSettings" placeholder="Old Password...">
+      </div>
+    </div>
+
+    <div class="row modRowsSettings">
+      <div class="col-sm-6 modPaddingTextBox">
+        <input type="password" id="newPassword" class="form-control btn-block modTbSettings" placeholder="New Password...">
+      </div>
+    </div>
+
+    <div class="row modRowsSettings">
+      <div class="col-sm-6 modPaddingTextBox">
+        <input type="password"  id="confirmPassword" class="form-control btn-block modTbSettings" placeholder="Confirm Password...">
+      </div>
+    </div>
+
+    <div class="row modRowsSettings">
+      <div class="col-sm-2 col-sm-offset-4 col-xs-5 col-xs-offset-7 modPaddingTextBox">
+        <input type="submit" class="btn btn-success btn-block modTbSettings" value="Save">
+      </div>
+    </div>
+  </form>
+  <%}%>
+
+
+
+
+
+  <%if(option==='settings-enrollment'){%>
+    <form id="enrollmentForm">
+      <div class="row modRowsSettings">
+        <div class="col-sm-6 modPaddingTextBox">
+          <b>Student Per Section:</b>
+          <input type="number" id="maxSection" class="form-control btn-block modTbSettings" placeholder="Max Student Per Section" value="<%-settings[0].maxStudent%>">
+        </div>
+      </div>
+
+
+
+      <div class="row modRowsSettings">
+        <div class="col-sm-6 modPaddingTextBox">
+          <b>Enrollment:</b>
+          <select id="enrollmentStatus" class="form-control btn-block modTbSettings">
+            <option <%if(settings[0].enrollmentStatus ==='enable'){%><%-'selected'%><%}%> value="enable">Enable</option>
+            <option <%if(settings[0].enrollmentStatus ==='disable'){%><%-'selected'%><%}%> value="disable">Disable</option>
+          </select>
+        </div>
+      </div>
+
+
+      <div class="row modRowsSettings">
+        <div class="col-sm-3 col-xs-6 modPaddingTextBox">
+          <b>School Year:</b>
+            <input type="number" id="academicFirst" placeholder="YYYY" min="2017" max="2100" class="form-control btn-block modTbSettings" value="<%-settings[0].academicFirst%>">
+        </div><br />
+
+        <div class="col-sm-3 col-xs-6 modPaddingTextBox">
+          <input type="number" id="academicEnds" placeholder="YYYY" min="2017" max="2100" class="form-control btn-block modTbSettings" value="<%-settings[0].academicEnds%>">
+        </div>
+      </div>
+
+
+      <div class="row modRowsSettings">
+        <div class="col-sm-6 modPaddingTextBox">
+          <b>Semester:</b>
+          <select class="form-control btn-block modTbSettings" id="semester">
+            <option <%if(settings[0].semester ==='1st Semester'){%><%-'selected'%><%}%> value="1st Semester">1st Semester</option>
+            <option <%if(settings[0].semester ==='2nd Semester'){%><%-'selected'%><%}%> value="2nd Semester">2nd Semester</option>
+          </select>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+      <div class="row modRowsSettings">
+        <div class="col-sm-2 col-sm-offset-4 col-xs-5 col-xs-offset-7 modPaddingTextBox">
+          <input type="submit" class="btn btn-success btn-block modTbSettings" placeholder="Confirm Password...">
+        </div>
+      </div>
+      </div>
+    </form>
+    <%}%>
+</body>
+
+<script>
+$(document).ready(function(){
+
+
+  $('#securityForm').submit(function(){
+    var oldPassword = $('#oldPassword').val();
+    var newPassword = $('#newPassword').val();
+    var confirmPassword = $('#confirmPassword').val();
+
+
+    if(newPassword === confirmPassword){
+      $.post('http://localhost:3000/edit-password-settings',{
+        oldPassword: oldPassword,
+        newPassword: newPassword,
+        confirmPassword: confirmPassword
+      });
+
+      window.location.href="settings";
+      return false;
+    }
+  });
+
+
+  $('#enrollmentForm').submit(function(){
+    var maxStudent = $('#maxSection').val();
+    var enrollmentStatus = $('#enrollmentStatus').val();
+    var academicFirst = $('#academicFirst').val();
+    var academicEnds = $('#academicEnds').val();
+    var semester = $('#semester').val();
+
+    $.post('http://localhost:3000/save-enrollment-settings',{
+      maxStudent: maxStudent,
+      enrollmentStatus: enrollmentStatus,
+      academicFirst: academicFirst,
+      academicEnds: academicEnds,
+      semester: semester
+    });
+    window.location.href="../settings";
+    return false;
+  });
+
+
+
+});
+
+
+</script>
+
+</html>
+<style>
+.modHeadings{
+  padding:0;
+  margin-top:10px;
+  letter-spacing:2px;
+}
+
+.modParaGraph{
+  color:rgb(140,140,140);
+}
+
+.modUsername{
+  color:rgb(140,140,140);
+}
+
+.modBtnGroup{
+  border-radius:0;
+}
+
+.modRowsSettings{
+  margin-top:10px;
+  padding-right:15px;
+}
+
+.modTbSettings{
+  border-radius:0;
+}
+
+.modPaddingTextBox{
+  padding-right:0;
+}
+</style>

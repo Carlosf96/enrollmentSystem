@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../assets/myStyle.css" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <title>Administrator</title>
+</head>
+<body>
+  <div class="row">
+  <div class="col-sm-3 col-sm-offset-9">
+    <a href="/administrator/schedules/admin-add-schedules" class="btn btn-primary modBtnStrands btn-block">Add Schedule</a>
+  </div>
+</div>
+
+<div class="row modBodySched">
+
+
+<%strand.forEach(function(strand){%>
+  <div class="panel modPanel">
+    <div class="panel-heading modPanelHeading"><span class="modMarginTop"><%-strand%> <a id="<%-strand%>" href="#" class="modDeleteSched" title="Delete <%-strand%>"><span class="fa fa-trash"></span></a></span></div>
+    <div class="panel-body modPanelData pre-scrollable">
+      <table class="table table-bordered table-striped" width="100%">
+        <tr class="modHeadTable">
+          <th>Subject</th>
+          <th>Time In</th>
+          <th>Time Out</th>
+          <th>Days</th>
+        </tr>
+
+          <%user.forEach(function(user){%>
+            <%if(user.strand == strand){%>
+            <tr class="modHeadTable">
+              <td><%-user.subject%></td>
+              <td><%-user.timeIn%></td>
+              <td><%-user.timeOut%></td>
+              <td><%-user.day.slice(1)%></td>
+            </tr>
+            <%}%>
+          <%})%>
+
+      </table>
+    </div>
+  </div>
+<%})%>
+
+</div>
+</body>
+</html>
+
+
+<script>
+  $(document).ready(function(){
+    $('.modPanelHeading a').click(function(){
+      var delSched = this.id;
+
+      $.post('http://localhost:3000/delete-whole-sched',{
+        delSched: delSched
+      });
+      location.reload();
+      return false;
+    });
+  });
+</script>
+
+<style>
+  .modBodySched{
+    padding:0 15px;
+  }
+
+  .modPanelData{
+    min-height:100px;
+    max-height:270px;
+    padding:0;
+  }
+
+
+  .modHeadTable{
+    border-bottom:1px solid rgb(220,220,220);
+    color:rgb(74, 74, 74);
+  }
+
+  .panel{
+    margin-bottom:20px;
+  }
+
+  .modPanel .modPanelHeading{
+    border-radius:0;
+    border:none;
+    height:35px;
+    padding-top:5px;
+    padding-left:10px;
+
+  }
+
+  .modDeleteSched{
+    float:right;
+    margin-right:10px;
+    color:rgb(232, 219, 218);
+  }
+  .modBtnStrands{
+    border-radius:0;
+    margin-top:15px;
+  }
+</style>

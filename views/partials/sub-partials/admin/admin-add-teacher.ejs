@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../assets/myStyle.css" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <title>Administrator</title>
+</head>
+<body>
+  <form>
+  <div class="row marginTopMod">
+    <div class="col-sm-12 modBox">
+      <div class="row">
+        <div class="col-sm-4">
+          <input type="text" class="form-control modTextBox btn-block" placeholder="ID Number" id="idNumber">
+        </div>
+      </div>
+
+      <div class="row marginTopMod">
+
+        <div class="col-sm-4 modPaddingBox1">
+          <input type="text" class="form-control modTextBox btn-block" placeholder="Lastname.." id="lastname">
+        </div>
+
+        <div class="col-sm-4 modPaddingBox2 hidden-xs">
+          <input type="text" class="form-control modTextBox btn-block" placeholder="Firstname.." id="firstname">
+        </div><br class="visible-xs">
+
+        <div class="col-sm-4 visible-xs">
+          <input type="text" class="form-control modTextBox btn-block" placeholder="Firstname.." id="firstname">
+        </div><br class="visible-xs">
+
+        <div class="col-sm-4 col-xs-12 modPaddingBox">
+          <input type="text" class="form-control modTextBox btn-block" placeholder="Middlename.." id="middlename">
+        </div>
+
+      </div>
+
+      <div class="row marginTopMod">
+        <div class="col-sm-8 modPaddingTextArea">
+          <textarea class="form-control modTextBox modTextArea btn-block" placeholder="Complete Address.." rows="4" id="address"></textarea>
+        </div><br class="visible-xs">
+
+        <div class="col-sm-4 modPaddingContact">
+          <input type="tel" class="form-control modTextBox btn-block" placeholder="Date of Birth.." id="dob">
+        </div>
+      </div>
+
+
+      <div class="row modBoxMargin">
+        <div class="col-sm-8 modPaddingContact">
+          <input type="tel" class="form-control modTextBox btn-block" placeholder="Contact Number.." id="contact">
+        </div>
+      </div>
+
+
+      <div class="row modBoxMargin">
+        <div class="col-sm-3 col-sm-offset-9 col-xs-5 col-xs-offset-7 modPaddingContact btn-group">
+          <input type="submit" class="btn btn-success modBtnTeacher btn-block" placeholder="Contact Number.." value="Save" id="contact">
+          <input type="submit" class="btn btn-default modBtnTeacher btn-block" placeholder="Contact Number.." value="Cancel" id="contact">
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+  </form>
+
+
+</body>
+</html>
+
+<style>
+  .modBox1{
+    padding:15px;
+  }
+  .modBox{
+    border:1px solid black;
+    padding:5px;
+  }
+
+  .modTextBox{
+    border-radius:0;
+  }
+
+
+  .modBoxMargin{
+    margin-top:10px;
+  }
+
+  .modTextArea{
+    max-height:80px;
+    max-width:480px;
+
+  }
+
+
+  .modBtnTeacher{
+    border-radius:0;
+  }
+
+  .marginTopMod{
+    margin-top:15px;
+  }
+</style>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../assets/myStyle.css" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <title>Administrator</title>
+</head>
+<body>
+  <div class="row modTableContainerUser" id="tableViewMod">
+    <div class="col-sm-12">
+      <div class="row">
+
+        <div class="col-sm-3 col-xs-3 modMarginReports">
+          <a href="/administrator/subjects/add-subject" class="btn btn-block btn-primary modBtnStrands" title="Add Subject"><span class="fa fa-plus visible-xs"></span><span class="hidden-xs">Add Subject</span></a>
+        </div>
+
+        <div class="col-sm-4 col-sm-offset-2 modMarginReports">
+          <input type="text" id="myInput" class="form-control btn-block modBtnStrands" placeholder="Search Here..">
+        </div>
+        <div class="col-sm-3 modMarginReports">
+          <select class="form-control btn-block modBtnStrands" id="curriType">
+            <option <%if(curriculum[0].curriculum==='new'){%><%-'selected'%><%}%> value="new">New Curriculum</option>
+            <option <%if(curriculum[0].curriculum==='old'){%><%-'selected'%><%}%> value="old">Old Curriculum</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-12 table-responsive">
+      <table class="table " width="100%">
+        <thead>
+          <tr class="modHeadTable">
+            <th>Course Title</th>
+            <th>Pre-requisite</th>
+            <th class="text-center">Modify</th>
+          </tr>
+        </thead>
+
+        <tbody id="myTable">
+        <%if(curriculum[0].curriculum==='new'){%>
+          <%user.forEach(function(user){%>
+            <tr class="modTr">
+              <td class="modTd"><b><span class="modSubjectText"><%-user.courseTitle%></span></b></td>
+              <td class="modTd"><span class="modPreReqText"><%-user.preRequisite%></span></td>
+              <td class="text-center">
+                <a class="edit text-center" title="Edit" href="/administrator/subjects/edit-subject/<%-user.courseTitle%>"><span class="fa fa-pencil"></span></a>
+                &nbsp &nbsp
+                <a class="del text-center" title="Delete" href="/administrator/subject/<%-user.courseTitle%>"><span class="fa fa-trash-o"></span></a>
+              </td>
+            </tr>
+          <%})%>
+        <%}%>
+        </tbody>
+
+        <tbody id="myTable">
+        <%if(curriculum[0].curriculum==='old'){%>
+          <%user3.forEach(function(user3){%>
+            <tr class="modTr">
+              <td class="modTd"><b><span class="modSubjectText"><%-user3.courseTitle%></span></b></td>
+              <td class="modTd"><span class="modPreReqText"><%-user3.preRequisite%></span></td>
+              <td class="text-center">
+                <a class="edit text-center" title="Edit" href="/administrator/subjects/edit-subject/<%-user3.courseTitle%>"><span class="fa fa-pencil"></span></a>
+                &nbsp &nbsp
+                <a class="del text-center" title="Delete" href="/administrator/subject/<%-user3.courseTitle%>"><span class="fa fa-trash-o"></span></a>
+              </td>
+            </tr>
+          <%})%>
+        <%}%>
+        </tbody>
+
+
+
+      </table>
+    </div>
+  </div>
+
+  <script>
+  $(document).ready(function(){
+    $('#curriType').change(function(){
+      var cbValue = $(this).val();
+
+
+      $.post('http://localhost:3000/curriculum-type',{
+        curriculum: cbValue
+      });
+      location.reload();
+      return false;
+    });
+
+
+    $("#myInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+
+  </script>
+</body>
+</html>
+<style>
+
+.modBtnStrands{
+  border-radius:0;
+}
+
+.del{
+  color:rgb(210, 210, 210);
+  font-size:16px;
+}
+
+.del:hover{
+  color:rgb(194, 129, 114);
+}
+
+.edit{
+  color:rgb(210, 210, 210);
+  font-size:16px;
+}
+
+.edit:hover{
+  color:rgb(168, 227, 166);
+}
+
+.modMarginReports{
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
+.modHeadTable , .modHeadTable th{
+  background-color:rgb(74, 140, 255);
+  border:1px solid rgb(220,220,220);
+  color:white;
+}
+
+.modTr, .modTd{
+  border:1px solid rgb(220,220,220);
+  background-color:white;
+}
+
+.modSubjectText{
+  color:rgb(74, 140, 255);
+
+}
+
+.modPreReqText{
+  color:rgb(150,150,150);
+}
+
+</style>

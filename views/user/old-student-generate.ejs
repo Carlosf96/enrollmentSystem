@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../assets/myStyle.css" type="text/css">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+
+      <div class="col-sm-3 hidden-xs">
+        <img src="../../assets/doloresSchoolLogo.png" class="img img-responsive modImageHeadOne hidden-sm">
+        <img src="../../assets/doloresSchoolLogo.png" class="img img-responsive modImageHeadTwo visible-sm">
+      </div>
+      <div class="col-sm-6">
+
+        <h2>OLD STUDENT</h2>
+        <p class="text-center modText modHeaderNew hidden-sm">
+          Republic of the Philippines<br />
+          Department of Education<br />
+          Region III<br />
+          Division of City of San Fernando Pampanga<br />
+          <b>DOLORES STAND ALONE SENIOR HIGH SCHOOL</b><br />
+          Dolores City of San Fernando Pampanga<br />
+          Tel No. (045)-402-5467<br />
+        </p>
+        <p class="text-left modText smallMod modHeaderNew visible-sm">
+          Republic of the Philippines<br />
+          Department of Education<br />
+          Region III<br />
+          Division of City of San Fernando Pampanga<br />
+          <b>DOLORES STAND ALONE SENIOR HIGH SCHOOL</b><br />
+          Dolores City of San Fernando Pampanga<br />
+          Tel No. (045)-402-5467<br />
+        </p>
+      </div>
+      <div class="col-sm-3 hidden-xs hidden-sm">
+        <img src="../../assets/kagawaranNgEdukasyonLogo.png" class="img img-responsive modImageHeadOne">
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+       <div class="col-sm-12 modBg">
+         <h4 class="text-center">LEARNERS DATA VERIFICATION FORM</h4>
+       </div>
+      <form id="verifyOldStudent">
+        <div class="row">
+
+        <div class="col-sm-12">
+          <p>
+            <b>Learner's Information:</b>
+          </p>
+        </div>
+        <div class="form-group col-sm-4">
+          <input type="text" class="form-control" id="lastname" placeholder="Enter Lastname.." value="">
+        </div>
+        <div class="form-group col-sm-4">
+          <input type="text" class="form-control" id="firstname" placeholder="Enter Firstname..">
+        </div>
+        <div class="form-group col-sm-4">
+          <input type="text" class="form-control" id="middlename" placeholder="Enter Middlename..">
+        </div>
+        <div class="form-group col-sm-4">
+          <input type="date" class="form-control" id="dob" placeholder="Enter Birthdate.." min="1960-01-01" max="2100-01-01" >
+        </div>
+        <div class="form-group col-sm-4">
+          <input type="text" class="form-control" id="lrn" placeholder="Enter LRN..">
+        </div>
+
+      <div class="col-sm-3 col-sm-offset-9 modMarginBtn">
+        <input type="submit" class="btn btn-success btn-block" value="Submit Information">
+      </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function(){
+      $('#verifyOldStudent').submit(function(){
+        var fullname = $('#lastname').val() + " / " + $('#firstname').val() + " / " + $('#middlename').val();
+        var dob = $('#dob').val();
+        var lrn = $('#lrn').val();
+
+        $.post('http://localhost:3000/old-student-authentication',{
+          fullname: fullname.toLowerCase(),
+          dob: dob,
+          lrn: lrn
+        });
+        window.location.href = '/student/first-form-enrollment';
+        return false;
+      });
+    });
+
+  </script>
+
+</body>
+</html>
+<style>
+input.form-control, select.form-control{
+  border-radius:0;
+  padding-left:5px;
+}
+
+input[type="submit"]{
+  border-radius:0;
+}
+  .modText{
+    letter-spacing:1px;
+    color:rgb(60,60,60);
+  }
+  .modLine{
+    width:100%;
+    border-bottom:1px solid rgb(200,200,200);
+  }
+  .modMarginBtn{
+    margin-bottom:20px;
+  }
+  .modBg{
+    background-color:#337eb8;
+    color:white;
+    margin-bottom:20px;
+  }
+
+  .modBtn{
+    margin-bottom:5px;
+  }
+
+  .modColorCb{
+    color:rgb(120,120,120);
+  }
+
+  .modFamColor{
+    color:rgb(120,120,120);
+  }
+
+  .modHeaderNew{
+    margin-top:30px;
+  }
+
+  .modImageHeadOne{
+    margin-top:15px;
+    max-width:190px;
+  }
+
+  .modBtnThird{
+    margin-bottom:20px;
+  }
+
+  .modImageHeadTwo{
+    margin-top:55px;
+    max-width:190px;
+  }
+  .smallMod{
+    margin-left:30px;
+    padding-left:30px;
+    border-left:1px solid rgb(170,170,170);
+  }
+
+  .modMarginForm2{
+    margin-top:10px;
+  }
+
+  .modMarginClass{
+    margin-bottom:20px;
+  }
+</style>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../assets/myStyle.css" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <title>Administrator</title>
+</head>
+<body>
+  <style>
+    .panel{
+      border:1px solid rgb(230,230,230);
+;
+    }
+    .panel-heading{
+      border-bottom:1px solid rgb(230,230,230);
+      background-color: rgb(84, 161, 255);
+      color:white;
+      font-family:tahoma;
+      letter-spacing:2px;
+      font-size:17px;
+    }
+  </style>
+
+  <input type="text" id="id_Holder" value="<%-courseTitle%>" hidden></p>
+  <div class="panel">
+    <div class="panel-heading">Edit Subject</div>
+    <div class="panel-body">
+
+
+      <form>
+        <div class="row">
+          <div class="col-sm-6 modComboAddUser">
+            <input type="text" id="courseTitle" class="form-control btn-block input-md" placeholder="Course Title" value='<%-courseTitle%>' required>
+          </div>
+        </div>
+
+
+
+        <div class="row">
+          <div class="col-sm-6 modComboAddUser">
+            <label for="preReq">Pre-requisite</label>
+            <select id="preReq" class="form-control btn-block input-md">
+              <option value="no pre-requisite">no pre-requisite</option>
+              <%user.forEach(function(data){%>
+                <option <%if(user2[0].preRequisite === data.courseTitle){%>selected<%}%> value="<%-data.courseTitle%>"><%-data.courseTitle%></option>
+              <%})%>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 modComboAddUser">
+            <label for="typeCur">Curriculum</label>
+            <select id="typeCur" class="form-control btn-block input-md">
+              <option <%if(user2[0].typeOfCurriculum==='new'){%>selected<%}%> value="new">New</option>
+              <option <%if(user2[0].typeOfCurriculum==='old'){%>selected<%}%> value="old">Old</option>
+            </select>
+          </div>
+        </div>
+
+
+        <hr class="hidden-xs"/>
+        <div class="row">
+          <div class="col-sm-2 col-sm-offset-2 col-xs-2 col-xs-offset-8 modComboAddUser">
+            <button title="Save" class="btn btn-success btn-block"><span class="fa fa-floppy-o visible-xs"></span><span class="hidden-xs">Update</span></button>
+          </div>
+
+          <div class="col-sm-2 col-xs-2 modComboAddUser">
+            <a href="/administrator/subjects" title="Cancel" class="btn btn-default btn-block"><span class="fa fa-sign-out visible-xs"></span><span class="hidden-xs">Cancel</span></a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+
+<script>
+
+$(document).ready(function(){
+  var preReq = "no pre-requisite";
+  var typeCur = "new";
+
+
+  $('select#preReq').change(function(){
+    preReq = $(this).children('option:selected').val();
+  });
+
+  $('select#typeCur').change(function(){
+    typeCur = $(this).children('option:selected').val();
+  });
+
+
+  $('form').on('submit',function(){
+
+      var idHolder = $('#id_Holder').val();
+      var courseTitle = $('#courseTitle').val();
+      var preRequisite = preReq;
+      var typeOfCurriculum = typeCur;
+
+
+    $.post("http://localhost:3000/update-subject-data",{
+      idHolder: idHolder.toLowerCase(),
+      courseTitle: courseTitle.toLowerCase(),
+      preRequisite: preRequisite,
+      typeOfCurriculum: typeOfCurriculum
+
+    });
+     window.location.href="../"
+     return false;
+     alert("ok");
+  })
+});
+
+
+</script>
+
+
+
+
+</body>
+</html>
+
+<style>
+
+  .modComboAddUser{
+    margin-top:5px;
+    padding:4px;
+  }
+</style>

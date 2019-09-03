@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../assets/myStyle.css" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+  <title>Administrator</title>
+</head>
+<body>
+<form>
+  <div class="col-sm-12 modMarginForm">
+    <div class="row">
+      <div class="col-sm-3 ">
+        <select class="btn-block form-control" id="strandSection">
+          <option value="">Strands</option>
+          <%section.forEach(function(section){%>
+            <option><%-section.strand%>-<%-section.section.toUpperCase()%></option>
+          <%})%>
+
+        </select>
+      </div>
+
+
+
+      <div class="col-sm-3 col-sm-offset-6">
+        <input type="submit" class="btn btn-success btn-block" value="Save">
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 modTable">
+    <div class="table-responsive">
+      <table class="modTableSchedule" width="100%">
+        <tr>
+          <th><center>Subject</center></th>
+          <th><center>Time In</center></th>
+          <th><center>Time out</center></th>
+          <th><center>Day</center></th>
+          <th></th>
+        </tr>
+
+
+      <%for(var i=0; i<9; i++){%>
+        <tr>
+          <td><select class="subjectInfo btn-block subjectCb" id="subjectCb<%-i%>">
+            <option>Select Subject</option>
+            <%subject.forEach(function(subject){%>
+              <option value="<%-subject.courseTitle%>"><%-subject.courseTitle%></option>
+            <%})%>
+          </select></td>
+
+          <td>
+            <p class="modTextTime text-center">Time in</p>
+          </td>
+
+          <td>
+            <p class="modTextTime  text-center">Time out</p>
+          </td>
+
+          <td>
+            <p class="modTextTime text-center">Day</p>
+          </td>
+
+          <td>
+            <a id="showTime<%-i%>" class="btn btn-block addSched"><span class="modFont<%-i%> fa fa-chevron-down"></span></a>
+          </td>
+        </tr>
+
+
+          <%for(var j=0; j<4; j++){%>
+            <tr class="hideTime<%-i%><%-j%> bgColorMod" hidden>
+              <td>
+                <select id="teacher<%-i%><%-j%>" class="subjectInfo minWidth btn-block">
+                  <option value="">Teacher</option>
+                  <%teacher.forEach(function(teacher){%>
+                    <option value="<%-teacher.idNumber%>"><%-teacher.firstname%> <%-teacher.lastname%></option>
+                  <%});%>
+                </select>
+              </td>
+
+              <td>
+                <input id="timeIn<%-i%><%-j%>" class="subjectInfo minWidth btn-block" type="time" id="apptIn" min="07:00" max="20:00">
+              </td>
+              <td>
+                <input id="timeOut<%-i%><%-j%>" class="subjectInfo minWidth btn-block"  type="time" id="apptOut" min="07:00" max="20:00">
+              </td>
+              <td>
+                <select id="day<%-i%><%-j%>" class="subjectInfo minWidth btn-block">
+                  <option value="">Day</option>
+                  <option value="1monday">Monday</option>
+                  <option value="2tuesday">Tuesday</option>
+                  <option value="3wednesday">Wednesday</option>
+                  <option value="4thursday">Thursday</option>
+                  <option value="5friday">Friday</option>
+                  <option value="6saturday">Saturday</option>
+                </select>
+              </td>
+            </tr>
+          <%}%>
+        <%}%>
+
+          <script>
+          $(document).ready(function(){
+
+
+            var hideStats = [true, true, true, true, true, true, true, true, true];
+
+            <%for(i=0; i<9; i++){%>
+
+              $('#showTime<%-i%>').click(function(){
+                if(hideStats[<%-i%>]===true){
+                  <%for(var j=0; j<4; j++){%>
+                    $('.hideTime<%-i%><%-j%>').removeAttr('hidden');
+                  <%}%>
+                  hideStats[<%-i%>] = false;
+                  $('#showTime<%-i%> .modFont<%-i%>').attr('class','modFont<%-i%> fa fa-chevron-up');
+                }else{
+                  <%for(var j=0; j<4; j++){%>
+                    $('.hideTime<%-i%><%-j%>').attr('hidden','hidden');
+                  <%}%>
+                  hideStats[<%-i%>] = true;
+                  $('#showTime<%-i%> .modFont<%-i%>').attr('class','modFont<%-i%> fa fa-chevron-down');
+                }
+
+              });
+            <%}%>
+
+
+          $('form').submit(function(){
+
+
+
+            var strandSection = $('#strandSection').val();
+            <%for(var i=0; i<9; i++){%>
+
+                var subject = $('#subjectCb<%-i%>').val();
+
+
+                <%for(var j=0; j<4; j++){%>
+
+                  var timeIn = $('#timeIn<%-i%><%-j%>').val();
+                  var timeOut = $('#timeOut<%-i%><%-j%>').val();
+                  var day = $('#day<%-i%><%-j%>').val();
+                  var teacher = $('#teacher<%-i%><%-j%>').val();
+
+
+                  if(timeIn === '' || timeOut=== '' || subject === '' || day === '' || strandSection === ''){
+
+                  }else{
+                    $.post("http://localhost:3000/save-schedule",{
+                      subject: subject,
+                      timeIn: timeIn,
+                      timeOut: timeOut,
+                      day: day,
+                      teacher: teacher,
+                      strand: strandSection
+                    }, function(){
+                      window.location.href="../schedules"
+                      return false;
+                    })
+                  }
+
+
+                <%}%>
+            <%}%>
+          });
+
+
+
+          });
+
+
+
+          </script>
+
+
+      </table>
+    </div>
+  </div>
+
+</body>
+</html>
+
+<style>
+
+.modTextTime{
+  color:rgb(200,200,200);
+  cursor:default;
+  padding:0;
+  margin:0;
+}
+
+tr .modTableCol{
+  border:none;
+}
+
+
+.addSched{
+  border:none;
+  border-radius:0;
+  background-color:white;
+  color:green;
+}
+  .subjectCb{
+    min-width:200px;
+  }
+
+  .subjectInfo{
+    height:100%;
+    border:none;
+    color:rgb(120,120,120);
+  }
+
+  .modColorTr *{
+    background-color:rgb(220,220,220);
+    height:30px;
+  }
+
+  .minWidth{
+    width:100%;
+    min-width:120px;
+    height:100%;
+    color:rgb(120,120,120);
+
+  }
+
+
+
+  .modTableSchedule, tr th{
+    height:40px;
+    color:white;
+    background-color:rgb(54, 161, 255);
+  }
+
+  .modTableSchedule, tr td{
+    background-color:white;
+  }
+
+  .modTableSchedule, tr td, tr th{
+    border:1px solid rgb(190,190,190);
+  }
+
+  .modTable{
+    margin-top:15px;
+  }
+
+  .modMarginForm{
+    margin-top:15px;
+  }
+</style>

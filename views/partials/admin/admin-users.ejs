@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../assets/myStyle.css" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+  <title>Administrator</title>
+</head>
+<body>
+  <div class="row">
+    <div class="col-sm-3  col-xs-2 modInputSize">
+      <a href="users/add-new-user" class="btn btn-primary modBtnStrand btn-block"><span class="visible-xs fa fa-plus"></span><span class="hidden-xs">Add User</span></a>
+    </div>
+
+    <style>
+      .modBtnStrand{
+        border-radius:0;
+      }
+    </style>
+
+    <div class="col-sm-3 col-sm-offset-1 col-xs-4 modInputSize">
+      <select id="dbView" class="form-control btn-block modBtnStrand">
+        <option <%if(viewStatus[0].userView ==='list'){%><%-'selected'%><%}%> value="list">List View</option>
+        <option <%if(viewStatus[0].userView ==='table'){%><%-'selected'%><%}%> value="table">Table View</option>
+      </select>
+    </div>
+
+    <div class="col-sm-5 col-xs-6 modInputSize">
+      <input type="text" title="Add User" class="form-control input-md btn-block modBtnStrand" placeholder="Search..">
+    </div>
+  </div>
+
+  <%if(viewStatus[0].userView ==='list'){%>
+    <div class="panel" id="listViewMod">
+      <div class="panel-heading">Users List View</div>
+      <div class="panel-body modBodyPanel pre-scrollable">
+        <div class="col-sm-12 modTextContainerUser">
+            <%user.forEach(function(user){%>
+            <div class="modBoxList col-sm-12">
+
+              <p class="modFullname"><b>&nbsp<%-user.firstname.charAt(0) + user.firstname.slice(1) + " " + user.lastname.charAt(0) + user.lastname.slice(1)%></b></p>
+              <p class="modNameHeader"><b>Username:</b>&nbsp<%-user.idNumber%></p>
+              <p class="modNameHeader"><b>Type of User:</b>&nbsp<%-user.userType%></p>
+              <p class="modNameHeader"><b>Contact Number:</b>&nbsp<%-user.phoneNumber%></p>
+
+
+              <div class="col-sm-9 col-xs-8 modMarginPanel">
+                <p class="modNameHeader"><b>Gender:</b>&nbsp<%-user.gender%></p>
+              </div>
+
+              <div class="col-sm-3 col-xs-4 modMarginPanel">
+                <a class="delList text-center" title="Delete" href="/administrator/users/<%-user.idNumber%>"><span class="fa fa-trash-o"></span></a>
+              </div>
+            </div>
+            <%})%>
+        </div>
+
+        <style>
+
+
+        </style>
+        <div class="col-sm-6">
+
+        </div>
+      </div>
+    </div>
+  <%}%>
+
+  <%if(viewStatus[0].userView ==='table'){%>
+    <div class="row modTableContainerUser" id="tableViewMod">
+      <div class="col-sm-12 table-responsive">
+        <table class="table " width="100%">
+            <tr class="modHeadTable">
+              <th>Username</th>
+              <th>Fullname</th>
+              <th class="">Contact Number:</th>
+              <th class="">Type</th>
+              <th><center>Action</center></th>
+            </tr>
+
+
+            <%user.forEach(function(user){%>
+
+              <tr class="tblHoverMod">
+                  <td><a href=""></a>&nbsp <%-user.idNumber%></td>
+                  <td><%-user.firstname + " " + user.lastname%></td>
+                  <td class=""><%-user.phoneNumber%></td>
+                  <td class=""><%-user.userType%></td>
+                  <td class="text-center">
+                    <a class="del text-center" title="Delete" href="/administrator/users/<%-user.idNumber%>"><span class="fa fa-trash-o"></span></a>
+                  </td>
+
+              </tr>
+            <%})%>
+        </table>
+      </div>
+    </div>
+  <%}%>
+
+  <script>
+    $(document).ready(function(){
+
+        $('select#dbView').change(function(){
+          var viewTblUser = $(this).val();
+
+          $.post('http://localhost:3000/change-view-user', {
+            userView: viewTblUser
+          });
+          window.location.href="users"
+          return false;
+        });
+    });
+  </script>
+
+
+</body>
+</html>
+
+<style>
+
+.modMarginPanel{
+  margin:0;
+  padding:0;
+}
+.addList , .delList{
+  font-size:20px;
+  color:rgb(190,190,190);
+  float:right;
+  padding:0;
+  margin:0;
+}
+.addList{
+  margin-right:10px;
+}
+.delList{
+  margin-right:10px;
+}
+.addList:hover{
+  color:rgb(168, 227, 166);
+}
+.delList:hover{
+  color:rgb(194, 129, 114);
+}
+.modBodyPanel{
+  max-height:500px;
+}
+.modBoxList{
+  width:100%;
+  border:1px solid rgb(200,200,200);
+  padding:5px;
+  background-color:white;
+  border-radius:10px;
+  height:180px;
+  margin-top:8px;
+}
+.modFullname{
+  color:rgb(12, 140, 250);
+  font-size:17px;
+  letter-spacing:2px;
+}
+.modNameHeader{
+  margin-left:15px;
+  color:rgb(77, 77, 77);
+}
+  .modInputSize{
+    margin-top:15px;
+
+  }
+  table{
+    background-color:white;
+    border:1px solid rgb(220,220,220);
+  }
+  tr,td{
+    border:1px solid rgb(220,220,220);
+  }
+  .modHeadTable, .modHeadTable th{
+    background-color:rgb(74, 140, 255);
+    border:1px solid rgb(220,220,220);
+    color:white;
+  }
+  .tblHoverMod:hover{
+    background-color:rgb(190,190,190);
+    color:white;
+    cursor:default;
+  }
+  .modTableContainerUser{
+    margin-top:10px;
+  }
+  .modTextContainerUser{
+    padding:0;
+  }
+  .add{
+    color:rgb(210, 210, 210);
+  }
+  .del{
+    color:rgb(210, 210, 210);
+  }
+  .add:hover{
+    color:rgb(168, 227, 166);
+  }
+  .del:hover{
+    color:rgb(194, 129, 114);
+  }
+  .modMargin{
+    margin-top:5px;
+  }
+</style>
