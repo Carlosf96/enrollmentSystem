@@ -1,5 +1,5 @@
 const studentRoute = require('../routes/student-route.js');
-const session = require('express-session');
+const session = require('cookie-session');
 const keys = require('../config/keys');
 const request = require('request');
 const crypto = require('crypto');
