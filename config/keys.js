@@ -11,7 +11,7 @@ module.exports = {
 
 
   mongodb:{
-    url: 'mongodb+srv://root:root@cluster0-cek6e.mongodb.net/test'
+    url: 'mongodb+srv://John:KZt8Kd32JitFKaSd@cluster0-78sma.mongodb.net/test?retryWrites=true&w=majority'
   },
 
   securitySaving:{
