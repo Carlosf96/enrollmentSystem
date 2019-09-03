@@ -18,15 +18,11 @@ console.log('updated');
 
 var port = process.env.PORT || 3000;
 mongoose.Promise = global.Promise;
-mongoose.set('debug', true);
-mongoose.connect(
-  process.env.MONGO_URI || keys.mongodb.url,
-  { useNewUrlParser: true },
-  err => {
-    if (err) throw err;
-    console.log('server is now connected to database');
-  }
-);
+// mongoose.set('debug', true);
+mongoose
+  .connect(process.env.MONGO_URI || keys.mongodb.url, { useNewUrlParser: true })
+  .then(() => console.log('MongDB connected sucessfully'))
+  .catch(err => console.log(err));
 
 var dateTime = require('node-datetime');
 var cron = require('node-cron');
