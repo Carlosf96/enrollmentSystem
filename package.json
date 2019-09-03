@@ -16,6 +16,7 @@
     "express-session": "^1.16.2",
     "express-validator": "^6.1.1",
     "mongoose": "^5.6.7",
+    "node-cron": "^2.0.3",
     "node-datetime": "^2.1.2",
     "passport": "^0.4.0",
     "promise": "^8.0.3",
